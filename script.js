@@ -2,7 +2,7 @@ const archives = [
   {
     id: "event-02",
     date: "2026.05.16",
-    title: "第2回　漂泊ノ夢",
+    title: "第二夜",
     youtubeId: "Mbz9-PqdlbE",
     thumbnail: "https://img.youtube.com/vi/Mbz9-PqdlbE/maxresdefault.jpg",
     program: [
@@ -14,7 +14,7 @@ const archives = [
   {
     id: "event-01",
     date: "2026.04.11",
-    title: "第1回　漂泊ノ夢",
+    title: "第一夜",
     youtubeId: "Mbz9-PqdlbE",
     thumbnail: "https://img.youtube.com/vi/Mbz9-PqdlbE/maxresdefault.jpg",
     program: [
