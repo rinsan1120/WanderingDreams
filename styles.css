@@ -259,7 +259,7 @@ img {
 .section-heading__en {
   margin: 0 0 18px;
   color: var(--accent);
-  font-size: 0.72rem;
+  font-size: 1.5rem;
   font-weight: 500;
   letter-spacing: 0.35em;
 }
