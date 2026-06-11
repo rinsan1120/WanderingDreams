@@ -716,14 +716,14 @@ img {
   padding-bottom: 0;
   border-bottom: 0;
 }
-
+/*
 .program-item__title {
   display: block;
   color: var(--text-main);
   font-weight: 500;
   line-height: 1.7;
   overflow-wrap: anywhere;
-}
+}*/
 
 .program-item__reader {
   display: block;
