@@ -130,9 +130,9 @@ const casts = [
 
 const staffs = [
   {
-    name: "スタッフA",
-    favorite: "イベント運営",
-    comment: "会場案内と進行を担当します。",
+    name: "龍飛",
+    favorite: "動画撮影",
+    comment: "＊＊＊＊＊＊＊＊＊＊＊＊＊",
     image: "assets/cast-placeholder-a.jpg",
     links: [
       {
@@ -146,37 +146,22 @@ const staffs = [
     ]
   },
   {
-    name: "スタッフB",
-    favorite: "音響・配信",
-    comment: "朗読会の音響と配信を担当します。",
-    image: "assets/cast-placeholder-a.jpg",
+    name: "りん（rinsan1120)",
+    favorite: "企画・運営",
+    comment: "本イベントの企画・運営をしています。関わる誰もが居心地がいいと思ってもらえるイベントにしていきたいです。",
+    image: "assets/members/rin.png",
     links: [
       {
         label: "VRChat",
-        url: "https://vrchat.com/home/user/usr_xxxxx"
+        url: "https://vrchat.com/home/user/usr_73654b2d-85b3-47e3-8a87-c8596b7c03c5"
       },
       {
         label: "X",
-        url: "https://x.com/usernameA"
-      }
-    ]
-  },
-  {
-    name: "スタッフC",
-    favorite: "広報・記録",
-    comment: "告知とイベント記録を担当します。",
-    image: "assets/cast-placeholder-a.jpg",
-    links: [
-      {
-        label: "VRChat",
-        url: "https://vrchat.com/home/user/usr_xxxxx"
-      },
-      {
-        label: "X",
-        url: "https://x.com/usernameA"
+        url: "https://x.com/rinsan11201"
       }
     ]
   }
+ 
 ];
 
 const archiveList = document.getElementById("archiveList");
