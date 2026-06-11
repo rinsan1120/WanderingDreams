@@ -196,11 +196,12 @@ img {
   content: "";
   position: absolute;
   inset: 0;
-  z-index: -3;
-  background:
-    linear-gradient(rgba(11, 19, 37, 0.28), rgba(11, 19, 37, 0.84)),
-    url("assets/hero-placeholder.jpg") center / cover no-repeat;
-  opacity: 0.46;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    rgba(11, 19, 37, 0.35),
+    rgba(11, 19, 37, 0.72)
+  );
 }
 
 .hero::after {
@@ -239,8 +240,14 @@ img {
 }
 
 .hero__content {
+  position: relative;
+  z-index: 2;
   width: min(920px, 100%);
   text-align: center;
+}
+
+.scroll-guide {
+  z-index: 2;
 }
 
 .eyebrow,
@@ -1090,7 +1097,7 @@ img {
 .hero-slideshow {
   position: absolute;
   inset: 0;
-  z-index: -1;
+  z-index: -2;
   overflow: hidden;
   pointer-events: none;
 }
