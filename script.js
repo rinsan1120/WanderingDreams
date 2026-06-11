@@ -128,12 +128,64 @@ const casts = [
   }
 ];
 
+const staffs = [
+  {
+    name: "スタッフA",
+    favorite: "イベント運営",
+    comment: "会場案内と進行を担当します。",
+    image: "assets/cast-placeholder-a.jpg",
+    links: [
+      {
+        label: "VRChat",
+        url: "https://vrchat.com/home/user/usr_xxxxx"
+      },
+      {
+        label: "X",
+        url: "https://x.com/usernameA"
+      }
+    ]
+  },
+  {
+    name: "スタッフB",
+    favorite: "音響・配信",
+    comment: "朗読会の音響と配信を担当します。",
+    image: "assets/cast-placeholder-a.jpg",
+    links: [
+      {
+        label: "VRChat",
+        url: "https://vrchat.com/home/user/usr_xxxxx"
+      },
+      {
+        label: "X",
+        url: "https://x.com/usernameA"
+      }
+    ]
+  },
+  {
+    name: "スタッフC",
+    favorite: "広報・記録",
+    comment: "告知とイベント記録を担当します。",
+    image: "assets/cast-placeholder-a.jpg",
+    links: [
+      {
+        label: "VRChat",
+        url: "https://vrchat.com/home/user/usr_xxxxx"
+      },
+      {
+        label: "X",
+        url: "https://x.com/usernameA"
+      }
+    ]
+  }
+];
+
 const archiveList = document.getElementById("archiveList");
 const archiveDate = document.getElementById("archiveDate");
 const archiveTitle = document.getElementById("archiveTitle");
 const archiveThumbnail = document.getElementById("archiveThumbnail");
 const archiveProgram = document.getElementById("archiveProgram");
 const castGrid = document.getElementById("castGrid");
+const staffGrid = document.getElementById("staffGrid");
 
 const videoModal = document.getElementById("videoModal");
 const videoFrame = document.getElementById("videoFrame");
@@ -201,6 +253,24 @@ function renderCasts() {
         <p>${cast.comment}</p>
         <div class="cast-card__links">
           ${cast.links.map(link => `<a class="social-link" href="${link.url}" target="_blank" rel="noopener noreferrer">${link.label}</a>`).join("")}
+        </div>
+      </div>
+    </article>
+  `).join("");
+}
+
+function renderStaffs() {
+  staffGrid.innerHTML = staffs.map(staff => `
+    <article class="staff-card">
+      <div class="staff-card__image">
+        <img src="${staff.image}" alt="${staff.name}のプロフィール画像" loading="lazy">
+      </div>
+      <div class="staff-card__body">
+        <h3>${staff.name}</h3>
+        <p><strong>担当:</strong> ${staff.favorite}</p>
+        <p>${staff.comment}</p>
+        <div class="staff-card__links">
+          ${staff.links.map(link => `<a class="social-link" href="${link.url}" target="_blank" rel="noopener noreferrer">${link.label}</a>`).join("")}
         </div>
       </div>
     </article>
@@ -306,3 +376,4 @@ sections.forEach((section) => navObserver.observe(section));
 renderArchiveControls();
 renderArchive(archives[0].id);
 renderCasts();
+renderStaffs();
