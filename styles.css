@@ -729,7 +729,7 @@ img {
 .program-item__reader {
   display: block;
   margin-top: 4px;
-  color: var(--text-sub);
+  color: var(--text-main);
   font-weight: 500;
   font-size: 1rem;
   line-height: 1.6;
