@@ -204,6 +204,18 @@ img {
   background: linear-gradient(180deg, transparent, var(--bg));
 }
 
+.hero-logo-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(2); /* 中央に配置して大きめに */
+  opacity: 0.15; /* 薄くしてタイトルを読みやすく */
+  pointer-events: none; /* 背景画像をクリックできなくする */
+  z-index: 0; /* hero__content の背後 */
+  max-width: 90%;
+  height: auto;
+}
+
 .hero__glow {
   position: absolute;
   z-index: -1;
