@@ -1104,8 +1104,9 @@ img {
     transform: none;
   }
 
-  .hero-photo-layer {
-    display: none;
+  .hero-photo--static {
+    transition: none !important;
+    will-change: auto;
   }
 }
 

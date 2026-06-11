@@ -242,9 +242,38 @@ function setupHeroPhotos() {
     slot.timer = window.setTimeout(() => hidePhoto(slot), fadeIn * 1000 + visibleTime);
   }
 
+  function buildStaticPhotos() {
+    const isMobile = mobileQuery.matches;
+    const staticPhotos = isMobile
+      ? [
+          { path: photoPaths[0], width: 138, left: "calc(100% - 116px)", top: "9%", rotation: 2 }
+        ]
+      : [
+          { path: photoPaths[0], width: 240, left: "3%", top: "16%", rotation: -2 },
+          { path: photoPaths[1], width: 260, left: "calc(100% - 290px)", top: "58%", rotation: 2 }
+        ];
+
+    staticPhotos.forEach((photo) => {
+      const element = document.createElement("img");
+      element.className = "hero-photo hero-photo--static";
+      element.src = photo.path;
+      element.alt = "";
+      element.style.left = photo.left;
+      element.style.top = photo.top;
+      element.style.setProperty("--photo-width", `${photo.width}px`);
+      element.style.opacity = "0.68";
+      element.style.transform = `rotate(${photo.rotation}deg)`;
+      element.style.transition = "none";
+      heroPhotoLayer.appendChild(element);
+    });
+  }
+
   function buildPhotoSlots() {
     clearPhotoSlots();
-    if (motionQuery.matches) return;
+    if (motionQuery.matches) {
+      buildStaticPhotos();
+      return;
+    }
 
     const slotCount = mobileQuery.matches ? 2 : 4;
 
