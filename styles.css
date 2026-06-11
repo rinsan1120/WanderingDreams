@@ -720,7 +720,6 @@ img {
 .program-item__title {
   display: block;
   color: var(--text-main);
-  font-size: 0.95rem;
   font-weight: 500;
   line-height: 1.7;
   overflow-wrap: anywhere;
@@ -729,9 +728,8 @@ img {
 .program-item__reader {
   display: block;
   margin-top: 4px;
-  color: var(--text-main);
-  font-weight: 500;
-  font-size: 1rem;
+  color: var(--text-sub);
+  font-size: 0.86rem;
   line-height: 1.6;
   overflow-wrap: anywhere;
 }
