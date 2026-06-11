@@ -112,7 +112,7 @@ const staffs = [
   {
     name: "龍飛",
     favorite: "動画撮影",
-    comment: "＊＊＊＊＊＊＊＊＊＊＊＊＊",
+    comment: "カメラマンを務める小さきいのち。好きなものは桃、森博嗣作品",
     image: "assets/members/ryuhi.png",
     links: [
       {
