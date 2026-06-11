@@ -6,13 +6,10 @@ const archives = [
     youtubeId: "Mbz9-PqdlbE",
     thumbnail: "https://img.youtube.com/vi/Mbz9-PqdlbE/maxresdefault.jpg",
     program: [
-      "双子の星（二）　著者：宮沢賢治",
-      "朗読：唯ノイフ",
-      "星の王子様（前編）　著者：サン=テグジュペリ",
-      "朗読：白羽まちる",
-      "星の音が聞こえる夜に　著者：あねり",
-      "花をつくる妖精のおはなし　著者：むち",
-      "朗読：139(イサク)"　
+      "双子の星（二）　宮沢賢治著　/　唯ノイフ",
+      "星の王子様（前編）　サン=テグジュペリ著　/　白羽まちる",
+      "星の音が聞こえる夜に　あねり著　/　139(イサク)",
+      "花をつくる妖精のおはなし　むち著　/　139(イサク)",
     ]
   },
   {
@@ -22,12 +19,9 @@ const archives = [
     youtubeId: "Mbz9-PqdlbE",
     thumbnail: "https://img.youtube.com/vi/Mbz9-PqdlbE/maxresdefault.jpg",
     program: [
-      "わるい王様（伝説）著者：アンデルセン",
-      "朗読：花咲くバッカス",
-      "双子の星　著者：宮沢賢治",
-      "朗読：唯ノイフ　",
-      "花と人間の話　著者：小川未明",
-      "朗読：ʚみけɞ"　
+      "わるい王様（伝説）　アンデルセン著 / 花咲くバッカス",
+      "双子の星　宮沢賢治著 / 唯ノイフ",
+      "花と人間の話　小川未明著 / ʚみけɞ",
     ]
   }
 ];
@@ -36,95 +30,79 @@ const casts = [
   {
     name: "花咲くバッカス",
     comment: "＊＊＊＊＊＊＊＊＊＊＊＊",
-    image: "assets/cast-placeholder-a.jpg",
+    image: "assets/members/bakkasu.png",
     links: [
       {
         label: "VRChat",
-        url: "https://vrchat.com/home/user/usr_xxxxx"
+        url: "https://vrchat.com/home/user/usr_22d5c01d-3007-4822-bed4-6b7d841dbbf7"
       },
       {
         label: "X",
-        url: "https://x.com/usernameA"
-      },
-      {
-        label: "YouTube",
-        url: "https://www.youtube.com/@usernameA"
+        url: "https://x.com/hanasakubakkas"
       }
     ]
   },
   {
     name: "唯ノイフ",
     comment: "＊＊＊＊＊＊＊＊＊＊＊＊",
-    image: "assets/cast-placeholder-a.jpg",
+    image: "assets/members/if.png",
     links: [
       {
         label: "VRChat",
-        url: "https://vrchat.com/home/user/usr_xxxxx"
+        url: "https://vrchat.com/home/user/usr_c0330280-ae70-49c5-a8f2-1101e66d6cad"
       },
       {
         label: "X",
-        url: "https://x.com/usernameA"
+        url: "https://x.com/Umaretai12"
       },
       {
         label: "YouTube",
-        url: "https://www.youtube.com/@usernameA"
+        url: "https://www.youtube.com/@%E5%94%AF%E4%B9%83%E3%82%A4%E3%83%95"
       }
     ]
   },
   {
     name: "ʚみけɞ",
     comment: "＊＊＊＊＊＊＊＊＊＊＊＊",
-    image: "assets/cast-placeholder-a.jpg",
+    image: "assets/members/mike.png",
     links: [
       {
         label: "VRChat",
-        url: "https://vrchat.com/home/user/usr_xxxxx"
+        url: "https://vrchat.com/home/user/usr_d0048c8a-391a-4ab8-a4bc-aa39a496e8d1"
       },
       {
         label: "X",
-        url: "https://x.com/usernameA"
-      },
-      {
-        label: "YouTube",
-        url: "https://www.youtube.com/@usernameA"
+        url: "https://x.com/mikemike_vrc"
       }
     ]
   },
   {
     name: "白羽まちる",
     comment: "＊＊＊＊＊＊＊＊＊＊＊＊",
-    image: "assets/cast-placeholder-a.jpg",
+    image: "assets/members/machiru.png",
     links: [
       {
         label: "VRChat",
-        url: "https://vrchat.com/home/user/usr_xxxxx"
+        url: "https://vrchat.com/home/user/usr_43f462ca-0592-4848-9de5-f24d84056a3f"
       },
       {
         label: "X",
-        url: "https://x.com/usernameA"
-      },
-      {
-        label: "YouTube",
-        url: "https://www.youtube.com/@usernameA"
+        url: "https://x.com/machiru_vrc"
       }
     ]
   },
     {
     name: "139",
     comment: "＊＊＊＊＊＊＊＊＊＊＊＊",
-    image: "assets/cast-placeholder-a.jpg",
+    image: "assets/members/139.png",
     links: [
       {
         label: "VRChat",
-        url: "https://vrchat.com/home/user/usr_xxxxx"
+        url: "https://vrchat.com/home/user/usr_e2b8cd6f-d1c9-4b89-a788-01d8ec424e9b"
       },
       {
         label: "X",
-        url: "https://x.com/usernameA"
-      },
-      {
-        label: "YouTube",
-        url: "https://www.youtube.com/@usernameA"
+        url: "https://x.com/139Magna"
       }
     ]
   }
@@ -135,15 +113,15 @@ const staffs = [
     name: "龍飛",
     favorite: "動画撮影",
     comment: "＊＊＊＊＊＊＊＊＊＊＊＊＊",
-    image: "assets/cast-placeholder-a.jpg",
+    image: "assets/members/ryuhi.png",
     links: [
       {
         label: "VRChat",
-        url: "https://vrchat.com/home/user/usr_xxxxx"
+        url: "https://vrchat.com/home/user/usr_867c325a-cb05-49cc-b983-7cf02188a9d0"
       },
       {
         label: "X",
-        url: "https://x.com/usernameA"
+        url: "https://x.com/doragon1739"
       }
     ]
   },
@@ -177,7 +155,6 @@ const staffGrid = document.getElementById("staffGrid");
 const videoModal = document.getElementById("videoModal");
 const videoFrame = document.getElementById("videoFrame");
 const openVideoButton = document.getElementById("openVideoButton");
-const openVideoButtonBottom = document.getElementById("openVideoButtonBottom");
 const closeVideoButton = document.getElementById("closeVideoButton");
 
 const menuButton = document.getElementById("menuButton");
@@ -282,7 +259,6 @@ archiveList.addEventListener("click", (event) => {
 });
 
 openVideoButton.addEventListener("click", openVideo);
-openVideoButtonBottom.addEventListener("click", openVideo);
 closeVideoButton.addEventListener("click", closeVideo);
 
 videoModal.addEventListener("click", (event) => {
