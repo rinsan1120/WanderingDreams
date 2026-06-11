@@ -720,6 +720,7 @@ img {
 .program-item__title {
   display: block;
   color: var(--text-main);
+  font-size: 1rem;
   font-weight: 500;
   line-height: 1.7;
   overflow-wrap: anywhere;
@@ -729,7 +730,7 @@ img {
   display: block;
   margin-top: 4px;
   color: var(--text-sub);
-  font-size: 0.86rem;
+  font-size: 1rem;
   line-height: 1.6;
   overflow-wrap: anywhere;
 }
