@@ -92,7 +92,7 @@ const casts = [
     ]
   },
     {
-    name: "139",
+    name: "139（イサク）",
     comment: "＊＊＊＊＊＊＊＊＊＊＊＊",
     image: "assets/members/139.png",
     links: [
