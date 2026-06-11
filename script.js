@@ -41,43 +41,69 @@ const archives = [
 ];
 
 const casts = [
- const casts = [
   {
-    name: "Aさん",             // VRC名
-    favorite: "星の王子さま", // 好きな作品
-    comment: "柔らかな声で届けます", // ひとこと
+    name: "Aさん",
+    favorite: "星の王子さま",
+    comment: "柔らかな声で物語をお届けします。",
+    image: "assets/cast-placeholder-a.jpg",
     links: [
-      { label: "Xを見る", url: "https://x.com/usernameA" },
-      { label: "VRChat", url: "https://vrchat.com/home/user?id=xxxxx" },
-      { label: "YouTube", url: "https://youtube.com/xxxx" }
-    ],
-    image: "assets/cast-placeholder-a.jpg"
+      {
+        label: "Xを見る",
+        url: "https://x.com/usernameA"
+      },
+      {
+        label: "VRChat",
+        url: "https://vrchat.com/home/user/usr_xxxxx"
+      },
+      {
+        label: "YouTube",
+        url: "https://www.youtube.com/@usernameA"
+      }
+    ]
   },
-  // 他のキャストも同様
-
   {
     name: "Bさん",
-    role: "読み手",
-    reading: "『智恵子抄』『織姫と彦星』",
-    profile: "詩の響きと感情の流れを大切にしながら、静かな時間をつくる読み手です。",
+    favorite: "智恵子抄",
+    comment: "詩の響きと感情の流れを大切に朗読します。",
     image: "assets/cast-placeholder-b.jpg",
-    xUrl: "https://x.com/"
+    links: [
+      {
+        label: "Xを見る",
+        url: "https://x.com/usernameB"
+      },
+      {
+        label: "VRChat",
+        url: "https://vrchat.com/home/user/usr_xxxxx"
+      }
+    ]
   },
   {
     name: "Cさん",
-    role: "読み手",
-    reading: "『年とったカシワの木のさいごの夢』",
-    profile: "穏やかな語りで、物語のあたたかさと切なさをそっと届けます。",
+    favorite: "年とったカシワの木のさいごの夢",
+    comment: "物語のあたたかさと切なさを、穏やかな声でお届けします。",
     image: "assets/cast-placeholder-c.jpg",
-    xUrl: "https://x.com/"
+    links: [
+      {
+        label: "Xを見る",
+        url: "https://x.com/usernameC"
+      }
+    ]
   },
   {
     name: "漂泊ノ海 駅長",
-    role: "主催・運営",
-    reading: "イベント企画／会場運営",
-    profile: "朗読会の企画と会場運営を担当。漂泊ノ海の夜に、声と物語が集まる時間をつくります。",
+    favorite: "夜や海を感じられる物語",
+    comment: "朗読会の企画と会場運営を担当しています。",
     image: "assets/cast-placeholder-d.jpg",
-    xUrl: "https://x.com/hyohakupost"
+    links: [
+      {
+        label: "Xを見る",
+        url: "https://x.com/hyohakupost"
+      },
+      {
+        label: "VRChat",
+        url: "https://vrchat.com/home/user/usr_xxxxx"
+      }
+    ]
   }
 ];
 
