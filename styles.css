@@ -251,7 +251,10 @@ img {
   z-index: 2;
 }
 
-
+.subtitle {
+  font-size: 0.5em; /* 元のサイズの50%に調整 */
+  font-weight: normal; /* 必要に応じて太字を解除 */
+}
 .eyebrow,
 .section-heading__en {
   margin: 0 0 18px;
