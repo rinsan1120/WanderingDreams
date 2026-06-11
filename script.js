@@ -185,11 +185,19 @@ const videoFrame = document.getElementById("videoFrame");
 const openVideoButton = document.getElementById("openVideoButton");
 const closeVideoButton = document.getElementById("closeVideoButton");
 
+const openRulesButton = document.getElementById("openRulesButton");
+const closeRulesButton = document.getElementById("closeRulesButton");
+const rulesModal = document.getElementById("rulesModal");
+const rulesModalContent = document.getElementById("rulesModalContent");
+
 const menuButton = document.getElementById("menuButton");
 const globalNav = document.getElementById("globalNav");
 const siteHeader = document.querySelector(".site-header");
 
+const PARTICIPATION_RULES_URL = "content/participation-rules.html";
+
 let activeArchive = archives[0];
+let participationRulesLoaded = false;
 
 function renderArchiveControls() {
   archiveList.innerHTML = archives
@@ -287,6 +295,48 @@ function closeVideo() {
   videoModal.close();
 }
 
+async function openRulesModal() {
+  rulesModal.showModal();
+
+  requestAnimationFrame(() => {
+    rulesModal.classList.add("is-visible");
+  });
+
+  if (participationRulesLoaded) {
+    return;
+  }
+
+  rulesModalContent.innerHTML =
+    '<p class="rules-modal__loading">参加ルールを読み込んでいます。</p>';
+
+  try {
+    const response = await fetch(PARTICIPATION_RULES_URL, {
+      cache: "no-cache"
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status}`);
+    }
+
+    const html = await response.text();
+    rulesModalContent.innerHTML = html;
+    participationRulesLoaded = true;
+  } catch (error) {
+    console.error("参加ルールの読み込みに失敗しました。", error);
+
+    rulesModalContent.innerHTML = `
+      <p class="rules-modal__error">
+        参加ルールを読み込めませんでした。時間をおいて再度お試しください。
+      </p>
+    `;
+  }
+}
+
+function closeRulesModal() {
+  rulesModal.classList.remove("is-visible");
+  rulesModal.close();
+}
+
 
 
 archiveList.addEventListener("click", (event) => {
@@ -307,6 +357,21 @@ videoModal.addEventListener("click", (event) => {
 videoModal.addEventListener("cancel", () => {
   videoFrame.src = "";
 });
+
+if (openRulesButton && closeRulesButton && rulesModal && rulesModalContent) {
+  openRulesButton.addEventListener("click", openRulesModal);
+  closeRulesButton.addEventListener("click", closeRulesModal);
+
+  rulesModal.addEventListener("click", (event) => {
+    if (event.target === rulesModal) {
+      closeRulesModal();
+    }
+  });
+
+  rulesModal.addEventListener("cancel", () => {
+    rulesModal.classList.remove("is-visible");
+  });
+}
 
 menuButton.addEventListener("click", () => {
   const isOpen = menuButton.getAttribute("aria-expanded") === "true";

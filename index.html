@@ -170,6 +170,13 @@
             >
               Groupに参加する
             </a>
+            <button
+              class="button button--ghost"
+              id="openRulesButton"
+              type="button"
+            >
+              参加ルール
+            </button>
           </div>
         </div>
       </article>
@@ -273,6 +280,37 @@
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowfullscreen
         ></iframe>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog
+    class="rules-modal"
+    id="rulesModal"
+    aria-labelledby="rulesModalTitle"
+  >
+    <div class="rules-modal__inner">
+      <div class="rules-modal__header">
+        <div>
+          <p class="rules-modal__eyebrow">PARTICIPATION RULES</p>
+          <h2 id="rulesModalTitle">参加ルール</h2>
+        </div>
+
+        <button
+          id="closeRulesButton"
+          class="modal-close"
+          type="button"
+          aria-label="参加ルールを閉じる"
+        >
+          ×
+        </button>
+      </div>
+
+      <div
+        class="rules-modal__content"
+        id="rulesModalContent"
+      >
+        <p class="rules-modal__loading">参加ルールを読み込んでいます。</p>
       </div>
     </div>
   </dialog>
