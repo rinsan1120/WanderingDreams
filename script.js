@@ -3,8 +3,8 @@ const archives = [
     id: "event-02",
     date: "2026.05.16",
     title: "第2回　漂泊ノ夢",
-    youtubeId: "ScMzIvxBSi4",
-    thumbnail: "https://img.youtube.com/vi/ScMzIvxBSi4/maxresdefault.jpg",
+    youtubeId: "Mbz9-PqdlbE",
+    thumbnail: "https://img.youtube.com/vi/Mbz9-PqdlbE/maxresdefault.jpg",
     program: [
       "読み手：唯ノイフ　「双子の星（二）」著者：宮沢賢治",
       "読み手：白羽まちる　「星の王子様（前編）」著者：サン=テグジュペリ",
@@ -15,8 +15,8 @@ const archives = [
     id: "event-01",
     date: "2026.04.11",
     title: "第1回　漂泊ノ夢",
-    youtubeId: "aqz-KE-bpKQ",
-    thumbnail: "https://img.youtube.com/vi/aqz-KE-bpKQ/maxresdefault.jpg",
+    youtubeId: "Mbz9-PqdlbE",
+    thumbnail: "https://img.youtube.com/vi/Mbz9-PqdlbE/maxresdefault.jpg",
     program: [
       "読み手：花咲くバッカス　「わるい王様（伝説）」著者：アンデルセン",
       "読み手：唯ノイフ　「双子の星」著者：宮沢賢治",
@@ -126,10 +126,7 @@ const casts = [
       }
     ]
   }
-
 ];
-
-
 
 const archiveList = document.getElementById("archiveList");
 const archiveDate = document.getElementById("archiveDate");
