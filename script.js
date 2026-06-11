@@ -131,10 +131,6 @@ const siteHeader = document.querySelector(".site-header");
 let activeArchive = archives[0];
 
 function renderArchiveControls() {
-  archiveSelect.innerHTML = archives
-    .map((archive) => `<option value="${archive.id}">${archive.date}　${archive.title}</option>`)
-    .join("");
-
   archiveList.innerHTML = archives
     .map(
       (archive, index) => `
@@ -157,7 +153,6 @@ function renderArchive(archiveId) {
   if (!archive) return;
 
   activeArchive = archive;
-  archiveSelect.value = archive.id;
   archiveDate.textContent = archive.date;
   archiveTitle.textContent = archive.title;
   archiveDescription.textContent = archive.description;
@@ -206,9 +201,7 @@ function closeVideo() {
   videoModal.close();
 }
 
-archiveSelect.addEventListener("change", (event) => {
-  renderArchive(event.target.value);
-});
+
 
 archiveList.addEventListener("click", (event) => {
   const button = event.target.closest("button[data-archive-id]");

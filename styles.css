@@ -252,7 +252,7 @@ img {
 }
 
 .subtitle {
-  font-size: 0.5em; /* 元のサイズの50%に調整 */
+  font-size: 0.7em; /* 元のサイズの70%に調整 */
   font-weight: normal; /* 必要に応じて太字を解除 */
 }
 .eyebrow,
@@ -536,20 +536,43 @@ img {
   top: calc(var(--header-height) + 24px);
 }
 
-.archive-picker label {
-  display: block;
-  margin-bottom: 10px;
+.archive-picker__label {
+  margin: 0 0 12px;
   color: var(--text-sub);
   font-size: 0.84rem;
 }
 
-.archive-picker select {
-  width: 100%;
-  padding: 14px 44px 14px 16px;
-  color: var(--text);
-  background: var(--panel-strong);
-  border: 1px solid var(--line);
-  border-radius: 12px;
+.archive-list {
+  max-height: 520px;
+  margin-top: 0;
+  padding-right: 8px;
+
+  display: grid;
+  gap: 10px;
+
+  overflow-y: auto;
+  overscroll-behavior: contain;
+
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-color) rgba(255, 255, 255, 0.05);
+}
+
+.archive-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.archive-list::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 999px;
+}
+
+.archive-list::-webkit-scrollbar-thumb {
+  background: var(--accent-color);
+  border-radius: 999px;
+}
+
+.archive-list::-webkit-scrollbar-thumb:hover {
+  background: #93c5fd;
 }
 
 .archive-list {
@@ -961,6 +984,9 @@ img {
   .cast-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+  .archive-list {
+  max-height: 300px;
+}
 }
 
 @media (max-width: 620px) {
