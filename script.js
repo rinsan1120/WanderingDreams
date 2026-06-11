@@ -3,7 +3,6 @@ const archives = [
     id: "event-03",
     date: "2026.06.20",
     title: "第3回　漂泊ノ夢",
-    description: "静かな夜に三つの作品をお届けした朗読会です。動画IDと内容は仮のものです。",
     youtubeId: "dQw4w9WgXcQ",
     thumbnail: "https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
     program: [
@@ -16,7 +15,6 @@ const archives = [
     id: "event-02",
     date: "2026.05.23",
     title: "第2回　漂泊ノ夢",
-    description: "声と物語に身をあずける、二度目の夜。YouTube動画IDを差し替えてお使いください。",
     youtubeId: "ScMzIvxBSi4",
     thumbnail: "https://img.youtube.com/vi/ScMzIvxBSi4/maxresdefault.jpg",
     program: [
@@ -29,7 +27,6 @@ const archives = [
     id: "event-01",
     date: "2026.04.18",
     title: "第1回　漂泊ノ夢",
-    description: "漂泊ノ夢、最初の朗読会。海の静けさとともに始まった夜の記録です。",
     youtubeId: "aqz-KE-bpKQ",
     thumbnail: "https://img.youtube.com/vi/aqz-KE-bpKQ/maxresdefault.jpg",
     program: [
@@ -112,7 +109,6 @@ const casts = [
 const archiveList = document.getElementById("archiveList");
 const archiveDate = document.getElementById("archiveDate");
 const archiveTitle = document.getElementById("archiveTitle");
-const archiveDescription = document.getElementById("archiveDescription");
 const archiveThumbnail = document.getElementById("archiveThumbnail");
 const archiveProgram = document.getElementById("archiveProgram");
 const castGrid = document.getElementById("castGrid");
@@ -154,7 +150,6 @@ function renderArchive(archiveId) {
   activeArchive = archive;
   archiveDate.textContent = archive.date;
   archiveTitle.textContent = archive.title;
-  archiveDescription.textContent = archive.description;
   archiveThumbnail.src = archive.thumbnail;
   archiveThumbnail.alt = `${archive.title}の動画サムネイル`;
 
