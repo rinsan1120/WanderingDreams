@@ -225,7 +225,7 @@ function renderArchive(archiveId) {
       ${archive.program.map((item) => `
         <li class="program-item">
           <span class="program-item__title">
-            ${item.title}（${item.author}）
+            ${item.title}（${item.author} 著）
           </span>
           <span class="program-item__reader">
             読み手：${item.reader}
