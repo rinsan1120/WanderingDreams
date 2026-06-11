@@ -41,14 +41,20 @@ const archives = [
 ];
 
 const casts = [
+ const casts = [
   {
-    name: "Aさん",
-    role: "読み手",
-    reading: "『星の王子さま』",
-    profile: "やわらかな声で、物語の余白まで丁寧に届ける読み手。プロフィール文は仮の内容です。",
-    image: "assets/cast-placeholder-a.jpg",
-    xUrl: "https://x.com/"
+    name: "Aさん",             // VRC名
+    favorite: "星の王子さま", // 好きな作品
+    comment: "柔らかな声で届けます", // ひとこと
+    links: [
+      { label: "Xを見る", url: "https://x.com/usernameA" },
+      { label: "VRChat", url: "https://vrchat.com/home/user?id=xxxxx" },
+      { label: "YouTube", url: "https://youtube.com/xxxx" }
+    ],
+    image: "assets/cast-placeholder-a.jpg"
   },
+  // 他のキャストも同様
+
   {
     name: "Bさん",
     role: "読み手",
@@ -145,38 +151,21 @@ function renderArchive(archiveId) {
 }
 
 function renderCasts() {
-  castGrid.innerHTML = casts
-    .map(
-      (cast) => `
-        <article class="cast-card">
-          <div class="cast-card__image">
-            <img
-              src="${cast.image}"
-              alt="${cast.name}のプロフィール画像"
-              loading="lazy"
-              onerror="this.style.display='none'"
-            >
-            <span class="cast-card__role">${cast.role}</span>
-          </div>
-          <div class="cast-card__body">
-            <h3>${cast.name}</h3>
-            <p class="cast-card__reading">${cast.reading}</p>
-            <p class="cast-card__profile">${cast.profile}</p>
-            <div class="cast-card__links">
-              <a
-                class="social-link"
-                href="${cast.xUrl}"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Xを見る
-              </a>
-            </div>
-          </div>
-        </article>
-      `
-    )
-    .join("");
+  castGrid.innerHTML = casts.map(cast => `
+    <article class="cast-card">
+      <div class="cast-card__image">
+        <img src="${cast.image}" alt="${cast.name}のプロフィール画像" loading="lazy">
+      </div>
+      <div class="cast-card__body">
+        <h3>${cast.name}</h3>
+        <p><strong>好きな作品:</strong> ${cast.favorite}</p>
+        <p>${cast.comment}</p>
+        <div class="cast-card__links">
+          ${cast.links.map(link => `<a class="social-link" href="${link.url}" target="_blank" rel="noopener noreferrer">${link.label}</a>`).join("")}
+        </div>
+      </div>
+    </article>
+  `).join("");
 }
 
 function openVideo() {
