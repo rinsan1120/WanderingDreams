@@ -94,14 +94,6 @@ const casts = [
     comment: "＊＊＊＊＊＊＊＊＊＊＊＊",
     image: "assets/members/mike.png",
     links: [
-      {
-        label: "VRChat",
-        url: "https://vrchat.com/home/user/usr_d0048c8a-391a-4ab8-a4bc-aa39a496e8d1"
-      },
-      {
-        label: " X ",
-        url: "https://x.com/mikemike_vrc"
-      }
     ]
   },
   {
