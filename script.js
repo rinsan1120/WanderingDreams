@@ -156,7 +156,7 @@ const staffs = [
   {
     name: "りん（rinsan1120)",
     favorite: "企画・運営",
-    comment: "本イベントの企画・運営をしています。関わる誰もが居心地がいいと思ってもらえるイベントにしていきたいです。",
+    comment: "",
     image: "assets/members/rin.png",
     links: [
       {
