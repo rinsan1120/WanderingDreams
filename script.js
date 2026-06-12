@@ -72,13 +72,9 @@ const casts = [
   },
   {
     name: "唯ノイフ",
-    comment: "＊＊＊＊＊＊＊＊＊＊＊＊",
+    comment: "今日も元気にVRを散策中！どこでもいつでも、みなさんに声を届けられたら嬉しいです！好きな物はゲーム、ボカロ、音楽、マンガ、アニメ、ボカロ、太宰治、宮沢賢治、倉橋ヨエコ様全曲",
     image: "assets/members/if.png",
     links: [
-      {
-        label: "VRChat",
-        url: "https://vrchat.com/home/user/usr_c0330280-ae70-49c5-a8f2-1101e66d6cad"
-      },
       {
         label: " X ",
         url: "https://x.com/Umaretai12"
