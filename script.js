@@ -3,8 +3,8 @@ const archives = [
     id: "event-02",
     date: "2026.05.16",
     title: "第二夜",
-    youtubeId: "qiW4PZCj4yYpCd0R",
-    thumbnail: "https://img.youtube.com/vi/qiW4PZCj4yYpCd0R/maxresdefault.jpg",
+    youtubeId: "j3ytnWDjNOE",
+    thumbnail: "https://img.youtube.com/vi/j3ytnWDjNOE/maxresdefault.jpg",
     program: [
       {
         title: "双子の星（二）",
