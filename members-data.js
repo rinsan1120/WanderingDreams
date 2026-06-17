@@ -38,12 +38,12 @@ export const casts = [
   },
   {
     name: "白羽まちる",
-    comment: "＊＊＊＊＊＊＊＊＊＊＊＊",
-    image: "assets/members/machiru.png",
+    comment: "普段からめちゃくちゃ読書をするわけではないので詳しくはないのですが、だからこそ普段本を読まない人でも分かりやすくて楽しめるものをお届けしようと思っています。漂泊ノ夢では心落ち着けてほんわかした気持ちになれる時間をみなさんと作っていけたらいいなぁと思っています。VRChatを始めて元々大好きな漂泊ノ海で朗読をさせていただけることに感謝です。普段は元気いっぱいにゲームを配信していますが、そのうち朗読もしたいなと思っています！",
+    image: "assets/members/machiru.jpg",
     links: [
       {
-        label: "VRChat",
-        url: "https://vrchat.com/home/user/usr_43f462ca-0592-4848-9de5-f24d84056a3f"
+        label: "Twitch",
+        url: "https://www.twitch.tv/shirahamachiru"
       },
       {
         label: " X ",
