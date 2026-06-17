@@ -26,7 +26,11 @@ export const archives = [
         author: "むち",
         reader: "139(イサク)"
       },
-    ]
+    ],
+    videoStaff: {
+      camera: "龍飛",
+      editor: "白羽まちる"
+    }
   },
   {
     id: "event-01",
@@ -50,6 +54,10 @@ export const archives = [
         author: "小川未明",
         reader: "ʚみけɞ"
       },
-    ]
+    ],
+    videoStaff: {
+      camera: "龍飛",
+      editor: "白羽まちる"
+    }
   }
 ];

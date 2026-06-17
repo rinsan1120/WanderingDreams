@@ -56,21 +56,55 @@ function renderArchive(archiveId) {
   archiveThumbnail.src = archive.thumbnail;
   archiveThumbnail.alt = `${archive.title}の動画サムネイル`;
 
-  archiveProgram.innerHTML = `
-    <h4>PROGRAM</h4>
-    <ul>
-      ${archive.program.map((item) => `
-        <li class="program-item">
-          <span class="program-item__reader">
-            朗読：${item.reader}
-          </span>
-          <span class="program-item__work">
-            『${item.title}』　${item.author} 著
-          </span>
-        </li>
-      `).join("")}
-    </ul>
-  `;
+  const programTitle = document.createElement("h4");
+  programTitle.textContent = "PROGRAM";
+
+  const programList = document.createElement("ul");
+  archive.program.forEach((item) => {
+    const programItem = document.createElement("li");
+    programItem.className = "program-item";
+
+    const reader = document.createElement("span");
+    reader.className = "program-item__reader";
+    reader.textContent = `朗読：${item.reader}`;
+
+    const work = document.createElement("span");
+    work.className = "program-item__work";
+    work.textContent = `『${item.title}』　${item.author} 著`;
+
+    programItem.append(reader, work);
+    programList.append(programItem);
+  });
+
+  const videoStaffRows = [
+    ["動画撮影", archive.videoStaff?.camera],
+    ["動画編集", archive.videoStaff?.editor]
+  ].filter(([, staffName]) => staffName);
+
+  archiveProgram.replaceChildren(programTitle, programList);
+
+  // 開催回ごとの動画担当者はarchives-data.jsだけで管理します。
+  if (videoStaffRows.length > 0) {
+    const videoStaff = document.createElement("div");
+    videoStaff.className = "archive-video-staff";
+
+    const definitionList = document.createElement("dl");
+
+    videoStaffRows.forEach(([label, staffName]) => {
+      const row = document.createElement("div");
+      const term = document.createElement("dt");
+      const description = document.createElement("dd");
+
+      term.textContent = label;
+      description.textContent = staffName;
+
+      row.append(term, description);
+      definitionList.append(row);
+    });
+
+    videoStaff.append(definitionList);
+    archiveProgram.append(videoStaff);
+  }
 
   archiveList.querySelectorAll("button").forEach((button) => {
     const isActive = button.dataset.archiveId === archive.id;
