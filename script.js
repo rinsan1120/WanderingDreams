@@ -32,8 +32,8 @@ const archives = [
     id: "event-01",
     date: "2026.04.11",
     title: "第一夜",
-    youtubeId: "Mbz9-PqdlbE",
-    thumbnail: "https://img.youtube.com/vi/Mbz9-PqdlbE/maxresdefault.jpg",
+    youtubeId: "lqz88xjOwz0",
+    thumbnail: "https://img.youtube.com/vi/lqz88xjOwz0/maxresdefault.jpg",
     program: [
       {
         title: "わるい王様（伝説）",
