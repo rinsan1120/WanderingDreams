@@ -77,8 +77,8 @@ function renderArchive(archiveId) {
   });
 
   const videoStaffRows = [
-    ["動画撮影", archive.videoStaff?.camera],
-    ["動画編集", archive.videoStaff?.editor]
+    ["動画撮影：", archive.videoStaff?.camera],
+    ["動画編集：", archive.videoStaff?.editor]
   ].filter(([, staffName]) => staffName);
 
   archiveProgram.replaceChildren(programTitle, programList);

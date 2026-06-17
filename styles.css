@@ -764,13 +764,19 @@ img {
 }
 
 .archive-video-staff dt {
-  color: var(--text-sub);
+  color: var(--text-main);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.6;
 }
 
 .archive-video-staff dd {
   min-width: 0;
   margin: 0;
   color: var(--text-main);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.6;
   overflow-wrap: anywhere;
 }
 
