@@ -1,5 +1,6 @@
 export const casts = [
   {
+    id: "bakkasu",
     name: "花咲くバッカス",
     comment: "＊＊＊＊＊＊＊＊＊＊＊＊",
     image: "assets/members/bakkasu.png",
@@ -15,6 +16,7 @@ export const casts = [
     ]
   },
   {
+    id: "if",
     name: "唯ノイフ",
     comment: "今日も元気にVRを散策中！どこでもいつでも、みなさんに声を届けられたら嬉しいです！好きな物はゲーム、ボカロ、音楽、マンガ、アニメ、太宰治、宮沢賢治、倉橋ヨエコ様全曲",
     image: "assets/members/if.png",
@@ -30,6 +32,7 @@ export const casts = [
     ]
   },
   {
+    id: "mike",
     name: "ʚみけɞ",
     comment: "静かな声でゆったりと朗読します。眠れない夜や心を落ち着かせたい夜のおともになれたら幸いです。好き➺ねこ、スイーツ、キラキラ、薄暮の空、朝井リョウ、森博嗣、ベイマックス",
     image: "assets/members/mike.png",
@@ -37,6 +40,7 @@ export const casts = [
     ]
   },
   {
+    id: "machiru",
     name: "白羽まちる",
     comment: "普段からめちゃくちゃ読書をするわけではないので詳しくはないのですが、だからこそ普段本を読まない人でも分かりやすくて楽しめるものをお届けしようと思っています。漂泊ノ夢では心落ち着けてほんわかした気持ちになれる時間をみなさんと作っていけたらいいなぁと思っています。",
     image: "assets/members/machiru.jpg",
@@ -52,6 +56,7 @@ export const casts = [
     ]
   },
     {
+    id: "isaku",
     name: "139（イサク）",
     comment: "初めまして。普段は小林勲功（こばやしいさく）というプロの声優としてお仕事をしています。　私が朗読において大事にしていることは、　『作品の文章、言葉に秘められた想いや沈んでいる感情を丁寧に拾い上げることです。』　聴きに来てくれた貴方の心に、素敵なものを残せますように。",
     image: "assets/members/139.png",

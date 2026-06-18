@@ -1,5 +1,6 @@
-import { archives } from "./archives-data.js";
+import { archives } from "./event-archives-data.js";
 import { casts, staffs } from "./members-data.js";
+import { readerArchives } from "./reader-archives-data.js";
 
 const archiveList = document.getElementById("archiveList");
 const archiveDate = document.getElementById("archiveDate");
@@ -19,6 +20,14 @@ const closeRulesButton = document.getElementById("closeRulesButton");
 const rulesModal = document.getElementById("rulesModal");
 const rulesModalContent = document.getElementById("rulesModalContent");
 
+const readerArchiveModal = document.getElementById("readerArchiveModal");
+const readerArchiveModalTitle = document.getElementById("readerArchiveModalTitle");
+const closeReaderArchiveButton = document.getElementById("closeReaderArchiveButton");
+const readerArchivePlayer = document.getElementById("readerArchivePlayer");
+const readerArchiveDetail = document.getElementById("readerArchiveDetail");
+const readerArchiveSelector = document.getElementById("readerArchiveSelector");
+const readerArchiveList = document.getElementById("readerArchiveList");
+
 const menuButton = document.getElementById("menuButton");
 const globalNav = document.getElementById("globalNav");
 const siteHeader = document.querySelector(".site-header");
@@ -27,6 +36,9 @@ const PARTICIPATION_RULES_URL = "content/participation-rules.html";
 
 let activeArchive = archives[0];
 let participationRulesLoaded = false;
+let activeReaderArchives = [];
+let activeReaderArchive = null;
+let readerArchiveReturnFocus = null;
 
 function renderArchiveControls() {
   archiveList.innerHTML = archives
@@ -83,7 +95,7 @@ function renderArchive(archiveId) {
 
   archiveProgram.replaceChildren(programTitle, programList);
 
-  // 開催回ごとの動画担当者はarchives-data.jsだけで管理します。
+  // 開催回ごとの動画担当者はevent-archives-data.jsだけで管理します。
   if (videoStaffRows.length > 0) {
     const videoStaff = document.createElement("div");
     videoStaff.className = "archive-video-staff";
@@ -113,21 +125,142 @@ function renderArchive(archiveId) {
   });
 }
 
+function getArchiveEvent(eventId) {
+  return archives.find((archive) => archive.id === eventId);
+}
+
+function getEventDateValue(event) {
+  if (!event?.date) return Number.NEGATIVE_INFINITY;
+
+  const [year, month, day] = event.date.split(".").map(Number);
+  if (!year || !month || !day) return Number.NEGATIVE_INFINITY;
+
+  const date = new Date(year, month - 1, day);
+  const time = date.getTime();
+
+  return Number.isNaN(time) ? Number.NEGATIVE_INFINITY : time;
+}
+
+function getReaderArchiveItems(readerId) {
+  if (!readerId) return [];
+
+  return readerArchives
+    .map((item, index) => ({
+      ...item,
+      event: getArchiveEvent(item.eventId),
+      originalIndex: index
+    }))
+    .filter((item) => item.readerId === readerId)
+    .sort((a, b) => {
+      const dateDifference = getEventDateValue(b.event) - getEventDateValue(a.event);
+      return dateDifference || a.originalIndex - b.originalIndex;
+    });
+}
+
+function getReaderArchiveThumbnail(item) {
+  if (item.thumbnail) return item.thumbnail;
+  if (item.youtubeId) {
+    return `https://img.youtube.com/vi/${item.youtubeId}/maxresdefault.jpg`;
+  }
+
+  return "";
+}
+
+function getReaderArchiveFallbackThumbnail(item) {
+  if (!item.youtubeId || item.thumbnail) return "";
+  return `https://img.youtube.com/vi/${item.youtubeId}/hqdefault.jpg`;
+}
+
+function appendReaderArchiveThumbnail(container, item, altText) {
+  const thumbnail = getReaderArchiveThumbnail(item);
+  if (!thumbnail) return false;
+
+  const image = document.createElement("img");
+  image.src = thumbnail;
+  image.alt = altText;
+
+  const fallbackThumbnail = getReaderArchiveFallbackThumbnail(item);
+  image.addEventListener("error", () => {
+    if (fallbackThumbnail && image.src !== fallbackThumbnail) {
+      image.src = fallbackThumbnail;
+      return;
+    }
+
+    image.remove();
+  });
+
+  container.append(image);
+  return true;
+}
+
 function renderCasts() {
-  castGrid.innerHTML = casts.map(cast => `
-    <article class="cast-card">
-      <div class="cast-card__image">
-        <img src="${cast.image}" alt="${cast.name}のプロフィール画像" loading="lazy">
-      </div>
-      <div class="cast-card__body">
-        <h3>${cast.name}</h3>
-        <p>${cast.comment}</p>
-        <div class="cast-card__links">
-          ${cast.links.map(link => `<a class="social-link" href="${link.url}" target="_blank" rel="noopener noreferrer">${link.label}</a>`).join("")}
-        </div>
-      </div>
-    </article>
-  `).join("");
+  if (!castGrid) return;
+
+  const castCards = casts.map((cast) => {
+    const castCard = document.createElement("article");
+    castCard.className = "cast-card";
+
+    const readerArchiveItems = getReaderArchiveItems(cast.id);
+    const hasReaderArchives = readerArchiveItems.length > 0;
+    const imageWrapper = document.createElement(hasReaderArchives ? "button" : "div");
+    imageWrapper.className = hasReaderArchives
+      ? "cast-card__image cast-card__archive-trigger"
+      : "cast-card__image";
+
+    if (hasReaderArchives) {
+      imageWrapper.type = "button";
+      imageWrapper.dataset.readerId = cast.id;
+      imageWrapper.setAttribute("aria-label", `${cast.name}の朗読アーカイブを見る`);
+    }
+
+    const image = document.createElement("img");
+    image.src = cast.image;
+    image.alt = `${cast.name}のプロフィール画像`;
+    image.loading = "lazy";
+    imageWrapper.append(image);
+
+    if (hasReaderArchives) {
+      const overlay = document.createElement("span");
+      overlay.className = "cast-card__archive-overlay";
+      overlay.setAttribute("aria-hidden", "true");
+
+      const icon = document.createElement("span");
+      icon.className = "cast-card__archive-icon";
+      icon.setAttribute("aria-hidden", "true");
+      icon.textContent = "▶";
+
+      imageWrapper.append(overlay, icon);
+    }
+
+    const body = document.createElement("div");
+    body.className = "cast-card__body";
+
+    const name = document.createElement("h3");
+    name.textContent = cast.name;
+
+    const comment = document.createElement("p");
+    comment.textContent = cast.comment;
+
+    const links = document.createElement("div");
+    links.className = "cast-card__links";
+
+    cast.links.forEach((link) => {
+      const anchor = document.createElement("a");
+      anchor.className = "social-link";
+      anchor.href = link.url;
+      anchor.target = "_blank";
+      anchor.rel = "noopener noreferrer";
+      anchor.textContent = link.label;
+      links.append(anchor);
+    });
+
+    body.append(name, comment, links);
+    castCard.append(imageWrapper, body);
+
+    return castCard;
+  });
+
+  castGrid.replaceChildren(...castCards);
 }
 
 function renderStaffs() {
@@ -146,6 +279,198 @@ function renderStaffs() {
       </div>
     </article>
   `).join("");
+}
+
+function stopReaderArchivePlayback() {
+  const frame = readerArchivePlayer?.querySelector("iframe");
+  if (frame) {
+    frame.src = "";
+  }
+}
+
+function renderReaderArchivePlayer(item) {
+  if (!readerArchivePlayer || !item) return;
+
+  readerArchivePlayer.replaceChildren();
+
+  if (!item.youtubeId) {
+    const placeholder = document.createElement("div");
+    placeholder.className = "reader-archive-player__placeholder";
+
+    const message = document.createElement("p");
+    message.textContent = "動画準備中";
+
+    placeholder.append(message);
+    readerArchivePlayer.append(placeholder);
+    return;
+  }
+
+  const thumbnailButton = document.createElement("button");
+  thumbnailButton.className = "reader-archive-player__thumbnail";
+  thumbnailButton.type = "button";
+  thumbnailButton.setAttribute("aria-label", `${item.title}を再生`);
+
+  const hasThumbnail = appendReaderArchiveThumbnail(
+    thumbnailButton,
+    item,
+    `${item.title}の動画サムネイル`
+  );
+
+  if (!hasThumbnail) {
+    const placeholder = document.createElement("span");
+    placeholder.className = "reader-archive-player__thumbnail-placeholder";
+    placeholder.textContent = "動画サムネイル";
+    thumbnailButton.append(placeholder);
+  }
+
+  const overlay = document.createElement("span");
+  overlay.className = "reader-archive-player__overlay";
+  overlay.setAttribute("aria-hidden", "true");
+
+  const playIcon = document.createElement("span");
+  playIcon.className = "reader-archive-player__play";
+  playIcon.setAttribute("aria-hidden", "true");
+  playIcon.textContent = "▶";
+
+  thumbnailButton.append(overlay, playIcon);
+  thumbnailButton.addEventListener("click", () => {
+    playReaderArchiveVideo(item);
+  });
+
+  readerArchivePlayer.append(thumbnailButton);
+}
+
+function playReaderArchiveVideo(item) {
+  if (!readerArchivePlayer || !item?.youtubeId) return;
+
+  const iframe = document.createElement("iframe");
+  iframe.src = `https://www.youtube-nocookie.com/embed/${item.youtubeId}?autoplay=1`;
+  iframe.title = `${item.title} 個別朗読アーカイブ`;
+  iframe.allow =
+    "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+  iframe.allowFullscreen = true;
+
+  readerArchivePlayer.replaceChildren(iframe);
+}
+
+function renderReaderArchiveDetail(item) {
+  if (!readerArchiveDetail || !item) return;
+
+  const title = document.createElement("h3");
+  title.textContent = `『${item.title}』`;
+
+  const author = document.createElement("p");
+  author.textContent = `${item.author} 著`;
+
+  readerArchiveDetail.replaceChildren(title, author);
+
+  if (item.event) {
+    const eventTitle = document.createElement("p");
+    eventTitle.textContent = `漂泊ノ夢 ${item.event.title}`;
+
+    const eventDate = document.createElement("p");
+    eventDate.textContent = item.event.date;
+
+    readerArchiveDetail.append(eventTitle, eventDate);
+  }
+}
+
+function renderReaderArchiveSelector() {
+  if (!readerArchiveSelector || !readerArchiveList) return;
+
+  readerArchiveList.replaceChildren();
+
+  if (activeReaderArchives.length < 2) {
+    readerArchiveSelector.hidden = true;
+    return;
+  }
+
+  readerArchiveSelector.hidden = false;
+
+  activeReaderArchives.forEach((item) => {
+    const archiveButton = document.createElement("button");
+    archiveButton.className = "reader-archive-card";
+    archiveButton.type = "button";
+    archiveButton.dataset.readerArchiveId = item.id;
+
+    const isActive = activeReaderArchive?.id === item.id;
+    archiveButton.classList.toggle("is-active", isActive);
+    archiveButton.setAttribute("aria-pressed", String(isActive));
+
+    const thumbnail = document.createElement("span");
+    thumbnail.className = "reader-archive-card__thumbnail";
+
+    const hasThumbnail = appendReaderArchiveThumbnail(
+      thumbnail,
+      item,
+      `${item.title}の動画サムネイル`
+    );
+
+    if (!hasThumbnail) {
+      const thumbnailPlaceholder = document.createElement("span");
+      thumbnailPlaceholder.className = "reader-archive-card__placeholder";
+      thumbnailPlaceholder.textContent = "動画準備中";
+      thumbnail.append(thumbnailPlaceholder);
+    }
+
+    const title = document.createElement("span");
+    title.className = "reader-archive-card__title";
+    title.textContent = item.title;
+
+    const author = document.createElement("span");
+    author.className = "reader-archive-card__author";
+    author.textContent = `${item.author} 著`;
+
+    archiveButton.append(thumbnail, title, author);
+
+    if (item.event?.title) {
+      const eventTitle = document.createElement("span");
+      eventTitle.className = "reader-archive-card__event";
+      eventTitle.textContent = `${item.event.title}より`;
+      archiveButton.append(eventTitle);
+    }
+
+    readerArchiveList.append(archiveButton);
+  });
+}
+
+function renderSelectedReaderArchive(readerArchiveId) {
+  const item = activeReaderArchives.find((archive) => archive.id === readerArchiveId);
+  if (!item) return;
+
+  activeReaderArchive = item;
+  stopReaderArchivePlayback();
+  renderReaderArchivePlayer(item);
+  renderReaderArchiveDetail(item);
+  renderReaderArchiveSelector();
+}
+
+function openReaderArchiveModal(readerId, trigger) {
+  const cast = casts.find((item) => item.id === readerId);
+  const archivesForReader = getReaderArchiveItems(readerId);
+  if (!readerArchiveModal || !cast || archivesForReader.length === 0) return;
+
+  readerArchiveReturnFocus = trigger;
+  activeReaderArchives = archivesForReader;
+  activeReaderArchive = archivesForReader[0];
+
+  if (readerArchiveModalTitle) {
+    readerArchiveModalTitle.textContent = cast.name;
+  }
+
+  renderReaderArchivePlayer(activeReaderArchive);
+  renderReaderArchiveDetail(activeReaderArchive);
+  renderReaderArchiveSelector();
+
+  readerArchiveModal.showModal();
+  closeReaderArchiveButton?.focus();
+}
+
+function closeReaderArchiveModal() {
+  if (!readerArchiveModal?.open) return;
+
+  stopReaderArchivePlayback();
+  readerArchiveModal.close();
 }
 
 function openVideo() {
@@ -207,6 +532,49 @@ archiveList.addEventListener("click", (event) => {
   if (!button) return;
   renderArchive(button.dataset.archiveId);
 });
+
+castGrid.addEventListener("click", (event) => {
+  const button = event.target.closest(".cast-card__archive-trigger");
+  if (!button) return;
+
+  openReaderArchiveModal(button.dataset.readerId, button);
+});
+
+if (readerArchiveList) {
+  readerArchiveList.addEventListener("click", (event) => {
+    const button = event.target.closest("button[data-reader-archive-id]");
+    if (!button) return;
+
+    renderSelectedReaderArchive(button.dataset.readerArchiveId);
+  });
+}
+
+if (closeReaderArchiveButton) {
+  closeReaderArchiveButton.addEventListener("click", closeReaderArchiveModal);
+}
+
+if (readerArchiveModal) {
+  readerArchiveModal.addEventListener("click", (event) => {
+    if (event.target === readerArchiveModal) {
+      closeReaderArchiveModal();
+    }
+  });
+
+  readerArchiveModal.addEventListener("cancel", () => {
+    stopReaderArchivePlayback();
+  });
+
+  readerArchiveModal.addEventListener("close", () => {
+    stopReaderArchivePlayback();
+    activeReaderArchives = [];
+    activeReaderArchive = null;
+
+    if (readerArchiveReturnFocus) {
+      readerArchiveReturnFocus.focus();
+      readerArchiveReturnFocus = null;
+    }
+  });
+}
 
 openVideoButton.addEventListener("click", openVideo);
 closeVideoButton.addEventListener("click", closeVideo);

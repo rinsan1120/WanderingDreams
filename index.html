@@ -233,6 +233,9 @@
       <div class="section-heading">
         <p class="section-heading__en">READERS</p>
         <h2 id="castsTitle">読み手紹介</h2>
+        <p class="section-heading__description">
+          読み手の写真を選ぶと、その読み手の朗読アーカイブをご覧いただけます。
+        </p>
       </div>
 
       <div class="cast-grid" id="castGrid"></div>
@@ -285,6 +288,48 @@
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowfullscreen
         ></iframe>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog
+    class="reader-archive-modal"
+    id="readerArchiveModal"
+    aria-labelledby="readerArchiveModalTitle"
+  >
+    <div class="reader-archive-modal__inner">
+      <div class="reader-archive-modal__header">
+        <h2 id="readerArchiveModalTitle"></h2>
+        <button
+          id="closeReaderArchiveButton"
+          class="modal-close"
+          type="button"
+          aria-label="読み手別朗読アーカイブを閉じる"
+        >
+          ×
+        </button>
+      </div>
+
+      <div
+        class="reader-archive-player"
+        id="readerArchivePlayer"
+      ></div>
+
+      <div
+        class="reader-archive-detail"
+        id="readerArchiveDetail"
+      ></div>
+
+      <div
+        class="reader-archive-selector"
+        id="readerArchiveSelector"
+        hidden
+      >
+        <h3>朗読作品を選ぶ</h3>
+        <div
+          class="reader-archive-list"
+          id="readerArchiveList"
+        ></div>
       </div>
     </div>
   </dialog>
