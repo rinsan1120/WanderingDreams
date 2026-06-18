@@ -1,11 +1,16 @@
 export const readerArchives = [
+/*
+読み手、開催回の順番は考慮不要（サイト側で読み込み時に整理）
+*/
+
+
   {
     id: "event-02-if-twin-stars-2",
     readerId: "if",
     eventId: "event-02",
     title: "双子の星（二）",
     author: "宮沢賢治",
-    youtubeId: "",
+    youtubeId: "Hb7I77c-AHw",
     thumbnail: ""
   },
   {
@@ -14,7 +19,7 @@ export const readerArchives = [
     eventId: "event-02",
     title: "星の王子様（前編）",
     author: "サン=テグジュペリ",
-    youtubeId: "",
+    youtubeId: "xKmZVGdA1lU",
     thumbnail: ""
   },
   {
