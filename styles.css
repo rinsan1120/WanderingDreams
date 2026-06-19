@@ -1059,6 +1059,7 @@ img {
   width: min(1040px, calc(100% - 30px));
   max-height: min(88vh, 860px);
   padding: 0;
+  overflow: hidden;
   color: var(--text);
   background:
     linear-gradient(
@@ -1077,8 +1078,9 @@ img {
 }
 
 .reader-archive-modal__inner {
+  box-sizing: border-box;
   max-height: min(88vh, 860px);
-  padding: 22px;
+  padding: 20px 22px 22px;
   overflow-y: auto;
 }
 
@@ -1087,7 +1089,7 @@ img {
   align-items: center;
   justify-content: space-between;
   gap: 18px;
-  margin-bottom: 18px;
+  margin-bottom: 14px;
 }
 
 .reader-archive-modal__header h2 {
@@ -1099,6 +1101,8 @@ img {
 }
 
 .reader-archive-player {
+  width: min(100%, 720px);
+  margin: 0 auto;
   aspect-ratio: 16 / 9;
   overflow: hidden;
   background: rgba(3, 8, 17, 0.92);
@@ -1177,40 +1181,42 @@ img {
 }
 
 .reader-archive-detail {
-  margin-top: 20px;
-  padding: 20px;
+  margin-top: 16px;
+  padding: 16px 18px;
   background: rgba(255,255,255,0.035);
   border: 1px solid var(--line);
   border-radius: 14px;
 }
 
 .reader-archive-detail h3 {
-  margin: 0 0 8px;
+  margin: 0 0 6px;
   color: var(--text-main);
   font-family: "Noto Serif JP", serif;
   font-size: clamp(1.2rem, 2.6vw, 1.65rem);
   font-weight: 500;
-  line-height: 1.6;
+  line-height: 1.45;
   overflow-wrap: anywhere;
 }
 
 .reader-archive-detail p {
   margin: 0;
   color: var(--text-sub);
-  line-height: 1.7;
+  line-height: 1.55;
   overflow-wrap: anywhere;
 }
 
 .reader-archive-detail p + p {
-  margin-top: 4px;
+  margin-top: 2px;
 }
 
 .reader-archive-selector {
-  margin-top: 22px;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
 }
 
 .reader-archive-selector h3 {
-  margin: 0 0 12px;
+  margin: 0 0 10px;
   color: var(--text-main);
   font-size: 0.9rem;
   font-weight: 600;
@@ -1219,8 +1225,8 @@ img {
 
 .reader-archive-list {
   display: flex;
-  gap: 14px;
-  padding-bottom: 10px;
+  gap: 16px;
+  padding: 2px 2px 12px;
   overflow-x: auto;
   overscroll-behavior-inline: contain;
   scroll-behavior: smooth;
