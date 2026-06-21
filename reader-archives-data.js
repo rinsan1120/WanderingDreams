@@ -26,9 +26,9 @@ export const readerArchives = [
     id: "event-02-isaku-starry-night",
     readerId: "isaku",
     eventId: "event-02",
-    title: "星の音が聞こえる夜に",
+    title: "星の音がきこえる夜に",
     author: "あねり",
-    youtubeId: "",
+    youtubeId: "8S3wFl6DKg4",
     thumbnail: ""
   },
   {
@@ -37,7 +37,7 @@ export const readerArchives = [
     eventId: "event-02",
     title: "花をつくる妖精のおはなし",
     author: "むち",
-    youtubeId: "",
+    youtubeId: "YCv2B3hC-kA",
     thumbnail: ""
   },
   {
