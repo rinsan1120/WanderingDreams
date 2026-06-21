@@ -17,7 +17,7 @@ export const archives = [
         reader: "白羽まちる"
       },
       {
-        title: "星の音が聞こえる夜に",
+        title: "星の音がきこえる夜に",
         author: "あねり",
         reader: "139(イサク)"
       },
