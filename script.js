@@ -102,6 +102,14 @@ function renderNextEventActions(groupButtonLabel) {
       >
         参加ルール
       </button>
+      <a
+        class="button button--ghost"
+        href="https://x.com/rinsan11201"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        最新情報（X）
+      </a>
     </div>
   `;
 }
