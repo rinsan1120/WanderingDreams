@@ -25,7 +25,7 @@ function renderNextEvent() {
     : (nextEvent?.preparing ?? {});
   const groupButtonLabel = isScheduled
     ? "Groupに参加する"
-    : "Groupに参加しておく";
+    : "Groupに参加する";
 
   nextEventCard.classList.toggle("event-card--preparing", !isScheduled);
 
