@@ -19,7 +19,7 @@ export const readerArchives = [
     eventId: "event-02",
     title: "星の王子様（前編）",
     author: "サン=テグジュペリ",
-    youtubeId: "xKmZVGdA1lU",
+    youtubeId: "WetvjBmFZu4",
     thumbnail: ""
   },
   {
