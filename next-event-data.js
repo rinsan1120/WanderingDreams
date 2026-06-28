@@ -21,7 +21,7 @@ export const nextEvent = {
     subLabel: "調整中",
     status: "PREPARING",
     title: "次の夜の支度をしています。",
-    message: "次回開催日が決まりましたら、当サイト及び駅長のXにてお知らせいたします。",
-    note: "※開催日・出演者・演目は、決まり次第掲載いたします。"
+    message: "次回開催日が決まりましたら、当サイト及び主催者のXにてお知らせいたします。",
+    note: ""
   }
 };
