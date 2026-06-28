@@ -97,7 +97,7 @@ export const staffs = [
   {
     name: "りん（rinsan1120)",
     favorite: "企画・運営",
-    comment: "",
+    comment: "お酒と旅が好きな駅長。皆さんの素敵な朗読に日々癒されています。",
     image: "assets/members/rin.png",
     links: [
       {
