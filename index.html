@@ -131,60 +131,8 @@
         <h2 id="eventTitle">次回開催予定</h2>
       </div>
 
-      <article class="event-card">
-        <div class="event-card__date" aria-label="開催日">
-          <span class="event-card__year">2026</span>
-          <span class="event-card__day">06.27</span>
-          <span class="event-card__weekday">SAT</span>
-        </div>
-
-        <div class="event-card__body">
-          <p class="event-card__status">NEXT READING</p>
-          <h3>漂泊ノ夢　第三夜</h3>
-
-          <dl class="event-details">
-            <div>
-              <dt>開場</dt>
-              <dd>22:20</dd>
-            </div>
-            <div>
-              <dt>開演</dt>
-              <dd>22:30</dd>
-            </div>
-            <div>
-              <dt>出演予定</dt>
-              <dd>白羽まちる、ʚみけɞ、花咲くバッカス</dd>
-            </div>
-            <div>
-              <dt>参加方法</dt>
-              <dd>「漂泊ノ海」Group＋インスタンス<br>
-                <span class="subtitle">※事前に「漂泊ノ海」のGroupへの参加をお願いいたします。</span></dd>
-            </div>
-          </dl>
-
-          <p class="event-card__note">
-            ※進行等の都合により、時間は若干前後する可能性がございます。
-          </p>
-
-          <div class="event-card__actions">
-            <a
-              class="button button--primary"
-              href="https://vrc.group/HYOHAK.5005"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Groupに参加する
-            </a>
-            <button
-              class="button button--ghost"
-              id="openRulesButton"
-              type="button"
-            >
-              参加ルール
-            </button>
-          </div>
-        </div>
-      </article>
+      <!-- next-event-data.js の設定に応じて次回開催予定を描画します。 -->
+      <article class="event-card" id="nextEventCard"></article>
     </section>
 
     <section class="section section--archives reveal" id="archives" aria-labelledby="archivesTitle">

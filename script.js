@@ -1,6 +1,112 @@
 import { archives } from "./event-archives-data.js";
 import { casts, staffs } from "./members-data.js";
 import { readerArchives } from "./reader-archives-data.js";
+import { nextEvent } from "./next-event-data.js";
+
+const nextEventCard = document.getElementById("nextEventCard");
+const GROUP_URL = "https://vrc.group/HYOHAK.5005";
+
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function renderNextEvent() {
+  if (!nextEventCard) return;
+
+  // mode が未定義・想定外の場合も、安全な調整中表示へ切り替えます。
+  const isScheduled = nextEvent?.mode === "scheduled";
+  const eventData = isScheduled
+    ? (nextEvent.scheduled ?? {})
+    : (nextEvent?.preparing ?? {});
+  const groupButtonLabel = isScheduled
+    ? "Groupに参加する"
+    : "Groupに参加しておく";
+
+  nextEventCard.classList.toggle("event-card--preparing", !isScheduled);
+
+  if (isScheduled) {
+    nextEventCard.innerHTML = `
+      <div class="event-card__date" aria-label="開催日">
+        <span class="event-card__year">${escapeHtml(eventData.year)}</span>
+        <span class="event-card__day">${escapeHtml(eventData.day)}</span>
+        <span class="event-card__weekday">${escapeHtml(eventData.weekday)}</span>
+      </div>
+
+      <div class="event-card__body">
+        <p class="event-card__status">${escapeHtml(eventData.status)}</p>
+        <h3>${escapeHtml(eventData.title)}</h3>
+
+        <dl class="event-details">
+          <div>
+            <dt>開場</dt>
+            <dd>${escapeHtml(eventData.openTime)}</dd>
+          </div>
+          <div>
+            <dt>開演</dt>
+            <dd>${escapeHtml(eventData.startTime)}</dd>
+          </div>
+          <div>
+            <dt>出演予定</dt>
+            <dd>${escapeHtml(eventData.performers)}</dd>
+          </div>
+          <div>
+            <dt>参加方法</dt>
+            <dd>${escapeHtml(eventData.participation)}<br>
+              <span class="subtitle">${escapeHtml(eventData.participationNote)}</span></dd>
+          </div>
+        </dl>
+
+        <p class="event-card__note">${escapeHtml(eventData.note)}</p>
+        ${renderNextEventActions(groupButtonLabel)}
+      </div>
+    `;
+    return;
+  }
+
+  nextEventCard.innerHTML = `
+    <div class="event-card__date" aria-label="開催日">
+      <span class="event-card__day">${escapeHtml(eventData.dateLabel)}</span>
+      <span class="event-card__weekday">${escapeHtml(eventData.subLabel)}</span>
+    </div>
+
+    <div class="event-card__body">
+      <p class="event-card__status">${escapeHtml(eventData.status)}</p>
+      <h3>${escapeHtml(eventData.title)}</h3>
+      <p class="event-card__message">${escapeHtml(eventData.message)}</p>
+      <p class="event-card__note">${escapeHtml(eventData.note)}</p>
+      ${renderNextEventActions(groupButtonLabel)}
+    </div>
+  `;
+}
+
+function renderNextEventActions(groupButtonLabel) {
+  return `
+    <div class="event-card__actions">
+      <a
+        class="button button--primary"
+        href="${GROUP_URL}"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        ${groupButtonLabel}
+      </a>
+      <button
+        class="button button--ghost"
+        id="openRulesButton"
+        type="button"
+      >
+        参加ルール
+      </button>
+    </div>
+  `;
+}
+
+renderNextEvent();
 
 const archiveList = document.getElementById("archiveList");
 const archiveDate = document.getElementById("archiveDate");
