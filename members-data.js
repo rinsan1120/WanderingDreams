@@ -37,6 +37,10 @@ export const casts = [
     comment: "静かな声でゆったりと朗読します。眠れない夜や心を落ち着かせたい夜のおともになれたら幸いです。好き➺ねこ、スイーツ、キラキラ、薄暮の空、朝井リョウ、森博嗣、ベイマックス",
     image: "assets/members/mike.png",
     links: [
+      {
+        label: "YouTube",
+        url: "https://www.youtube.com/@%E3%81%BF%E3%81%91voice"
+      }
     ]
   },
   {
