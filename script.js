@@ -353,6 +353,7 @@ function renderCasts() {
     name.textContent = cast.name;
 
     const comment = document.createElement("p");
+    comment.className = "cast-card__profile";
     comment.textContent = cast.comment;
 
     const links = document.createElement("div");
