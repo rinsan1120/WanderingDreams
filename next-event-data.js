@@ -10,7 +10,7 @@ export const nextEvent = {
     title: "漂泊ノ夢　第四夜",
     openTime: "22:20",
     startTime: "22:30",
-    performers: "白羽まちる、唯ノイフ、？？？",
+    performers: "白羽まちる、唯ノイフ、ʚみけɞ",
     participation: "「漂泊ノ海」Groupインスタンス",
     participationNote: "※事前に「漂泊ノ海」のGroupへの参加をお願いいたします。",
     note: "※進行等の都合により、時間は若干前後する可能性がございます。"
