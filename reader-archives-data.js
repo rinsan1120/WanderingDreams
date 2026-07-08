@@ -3,7 +3,33 @@ export const readerArchives = [
 読み手、開催回の順番は考慮不要（サイト側で読み込み時に整理）
 */
 
-
+  {
+    id: "event-03-machiru-little-prince-2",
+    readerId: "machiru",
+    eventId: "event-03",
+    title: "星の王子さま（後編）",
+    author: "サン=テグジュペリ",
+    youtubeId: "SdStX04sdF8",
+    thumbnail: ""
+  },
+  {
+    id: "event-03-mike-orihime-and-hikoboshi",
+    readerId: "mike",
+    eventId: "event-03",
+    title: "織姫と彦星",
+    author: "ʚみけɞ",
+    youtubeId: "WN6bVJGSPXY",
+    thumbnail: ""
+  },
+  {
+    id: "event-03-bakkasu-kashiwa-dream",
+    readerId: "bakkasu",
+    eventId: "event-03",
+    title: "年とったカシワの木のさいごの夢",
+    author: "アンデルセン",
+    youtubeId: "z1sadDOXiW4",
+    thumbnail: ""
+  },
   {
     id: "event-02-if-twin-stars-2",
     readerId: "if",

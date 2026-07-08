@@ -1,4 +1,32 @@
 export const archives = [
+    {
+    id: "event-03",
+    date: "2026.06.27",
+    title: "第三夜",
+    youtubeId: "XWj7ig7OJ9U",
+    thumbnail: "https://img.youtube.com/vi/XWj7ig7OJ9U/maxresdefault.jpg",
+    program: [
+      {
+        title: "星の王子さま（後編）",
+        author: "サン=テグジュペリ",
+        reader: "白羽まちる"
+      },
+      {
+        title: "織姫と彦星",
+        author: "ʚみけɞ",
+        reader: "ʚみけɞ"
+      },
+      {
+        title: "年とったカシワの木のさいごの夢",
+        author: "アンデルセン",
+        reader: "花咲くバッカス"
+      }
+    ],
+    videoStaff: {
+      camera: "龍飛",
+      editor: "白羽まちる"
+    }
+  },
   {
     id: "event-02",
     date: "2026.05.16",
