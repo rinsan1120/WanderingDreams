@@ -12,8 +12,8 @@ HTML / CSS / JavaScriptのみで構成された、GitHub Pages向けの静的な
 - `styles.css`：PC・スマートフォン対応デザイン、アニメーション、モーダル表示
 - `script.js`：表示生成、アーカイブ切替、各種モーダル、メニュー制御
 - `next-event-data.js`：次回開催情報
-- `event-archives-data.js`：開催回全体のアーカイブ情報
-- `reader-archives-data.js`：読み手ごとの個別朗読アーカイブ情報
+- `event-archives-data.js`：各開催回ファイルを読み込む索引
+- `archives/event-XX.js`：開催回ごとのアーカイブ情報
 - `members-data.js`：読み手・スタッフ情報
 - `content/participation-rules.html`：参加ルールモーダルに読み込む本文
 - `assets/`：トップ写真、読み手・スタッフ画像、ロゴなどの画像
@@ -33,7 +33,9 @@ HTML / CSS / JavaScriptのみで構成された、GitHub Pages向けの静的な
 
 ### 開催回全体のアーカイブ
 
-開催回全体のアーカイブは `event-archives-data.js` の `archives` 配列で管理します。
+開催回全体のアーカイブは `archives/event-XX.js` で開催回ごとに管理します。
+
+`event-archives-data.js` は各開催回ファイルを読み込み、`archives` 配列として公開する索引ファイルです。
 
 各開催回は主に以下の情報を持ちます。
 
@@ -41,32 +43,40 @@ HTML / CSS / JavaScriptのみで構成された、GitHub Pages向けの静的な
 - `date`：開催日
 - `title`：開催回タイトル
 - `youtubeId`：開催回全体のYouTube動画ID
-- `thumbnail`：開催回全体のサムネイルURL
+- `thumbnail`：開催回全体の独自サムネイルURL（通常は省略可能）
 - `program`：朗読作品一覧
 - `videoStaff.camera`：動画撮影担当
 - `videoStaff.editor`：動画編集担当
 
 `youtubeId` を設定すると、開催回別アーカイブの動画モーダルで再生されます。
 
+開催回全体のサムネイルは、`thumbnail` がない場合は `youtubeId` から自動生成されます。
+
 ### 読み手ごとの個別朗読アーカイブ
 
-読み手別の個別朗読動画は `reader-archives-data.js` の `readerArchives` 配列で管理します。
+読み手別の個別朗読動画は、各 `archives/event-XX.js` の `program` 内にある `readerArchive` で管理します。
+
+独立した読み手別データファイルはありません。サイト側が `archives` 内の演目を走査し、`readerId` ごとに読み手別アーカイブを自動生成します。
 
 各個別アーカイブは主に以下の情報を持ちます。
 
-- `id`：個別朗読動画ごとのID
-- `readerId`：読み手ID
-- `eventId`：開催回ID
-- `title`：作品名
-- `author`：著者名
-- `youtubeId`：個別朗読動画のYouTube動画ID
-- `thumbnail`：個別サムネイルURL
+- `program[].id`：演目ID
+- `program[].readerId`：読み手ID
+- `program[].readerName`：ゲストなど例外時の読み手表示名
+- `program[].title`：作品名
+- `program[].author`：著者名
+- `program[].readerArchive.youtubeId`：個別朗読動画のYouTube動画ID
+- `program[].readerArchive.thumbnail`：個別サムネイルURL（通常は省略可能）
 
 `readerId` は `members-data.js` の読み手IDと紐付きます。
 
-`eventId` は `event-archives-data.js` の開催回IDと紐付きます。開催回タイトルや開催日は、`eventId` から自動で取得されます。
+開催回タイトルや開催日は、演目が属する開催回データから自動で取得されます。
 
-`thumbnail` が空で `youtubeId` がある場合は、YouTubeのサムネイルURLを自動生成します。
+`readerArchive` を省略すると、読み手別アーカイブには表示されません。
+
+`readerArchive` があり `youtubeId` が空の場合は、読み手別アーカイブに「動画準備中」と表示されます。
+
+`thumbnail` がなく `youtubeId` がある場合は、YouTubeのサムネイルURLを自動生成します。
 
 ### 読み手・スタッフ
 

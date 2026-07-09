@@ -1,6 +1,5 @@
 import { archives } from "./event-archives-data.js";
 import { casts, staffs } from "./members-data.js";
-import { readerArchives } from "./reader-archives-data.js";
 import { nextEvent } from "./next-event-data.js";
 
 const nextEventCard = document.getElementById("nextEventCard");
@@ -154,6 +153,88 @@ let activeReaderArchives = [];
 let activeReaderArchive = null;
 let readerArchiveReturnFocus = null;
 
+function getCastById(readerId) {
+  return casts.find((cast) => cast.id === readerId);
+}
+
+function getReaderName(programItem) {
+  return getCastById(programItem?.readerId)?.name
+    || programItem?.readerName
+    || "読み手未設定";
+}
+
+function getYouTubeThumbnail(youtubeId, size = "maxresdefault") {
+  if (!youtubeId) return "";
+  return `https://img.youtube.com/vi/${youtubeId}/${size}.jpg`;
+}
+
+function hasYouTubeUrl(value) {
+  return typeof value === "string" && /^https?:\/\//.test(value);
+}
+
+function isValidEventDate(value) {
+  return /^\d{4}\.\d{2}\.\d{2}$/.test(String(value ?? ""));
+}
+
+function validateArchiveData() {
+  const eventIds = new Set();
+  const castIds = new Set(casts.map((cast) => cast.id));
+
+  archives.forEach((archive) => {
+    const eventLabel = archive?.id || "開催回ID未設定";
+
+    if (!archive?.id || !archive.date || !archive.title) {
+      console.warn("開催回の必須項目が不足しています。", archive);
+    }
+
+    if (archive?.id) {
+      if (eventIds.has(archive.id)) {
+        console.warn(`開催回IDが重複しています: ${archive.id}`);
+      }
+      eventIds.add(archive.id);
+    }
+
+    if (!isValidEventDate(archive?.date)) {
+      console.warn(`開催日の形式が不正です: ${eventLabel}`, archive?.date);
+    }
+
+    if (hasYouTubeUrl(archive?.youtubeId)) {
+      console.warn(`開催回全体のyoutubeIdにURL全体が入力されています: ${eventLabel}`, archive.youtubeId);
+    }
+
+    if (!Array.isArray(archive?.program)) {
+      console.warn(`programが配列ではありません: ${eventLabel}`, archive?.program);
+      return;
+    }
+
+    const programIds = new Set();
+    archive.program.forEach((programItem) => {
+      const programLabel = `${eventLabel} / ${programItem?.id || "演目ID未設定"}`;
+
+      if (!programItem?.id || !programItem.title || !programItem.author || !programItem.readerId) {
+        console.warn(`演目の必須項目が不足しています: ${programLabel}`, programItem);
+      }
+
+      if (programItem?.id) {
+        if (programIds.has(programItem.id)) {
+          console.warn(`同じ開催回内で演目IDが重複しています: ${programLabel}`);
+        }
+        programIds.add(programItem.id);
+      }
+
+      if (programItem?.readerId && !castIds.has(programItem.readerId) && !programItem.readerName) {
+        console.warn(`members-data.jsに存在しないreaderIdです: ${programLabel}`, programItem.readerId);
+      }
+
+      if (programItem?.readerArchive && hasYouTubeUrl(programItem.readerArchive.youtubeId)) {
+        console.warn(`個別朗読動画のyoutubeIdにURL全体が入力されています: ${programLabel}`, programItem.readerArchive.youtubeId);
+      }
+    });
+  });
+}
+
+validateArchiveData();
+
 function renderArchiveControls() {
   archiveList.innerHTML = archives
     .map(
@@ -179,7 +260,13 @@ function renderArchive(archiveId) {
   activeArchive = archive;
   archiveDate.textContent = archive.date;
   archiveTitle.textContent = archive.title;
-  archiveThumbnail.src = archive.thumbnail;
+  archiveThumbnail.onerror = () => {
+    const fallbackThumbnail = getYouTubeThumbnail(archive.youtubeId, "hqdefault");
+    if (fallbackThumbnail && archiveThumbnail.src !== fallbackThumbnail) {
+      archiveThumbnail.src = fallbackThumbnail;
+    }
+  };
+  archiveThumbnail.src = archive.thumbnail || getYouTubeThumbnail(archive.youtubeId);
   archiveThumbnail.alt = `${archive.title}の動画サムネイル`;
 
   const programTitle = document.createElement("h4");
@@ -192,7 +279,7 @@ function renderArchive(archiveId) {
 
     const reader = document.createElement("span");
     reader.className = "program-item__reader";
-    reader.textContent = `朗読：${item.reader}`;
+    reader.textContent = `朗読：${getReaderName(item)}`;
 
     const work = document.createElement("span");
     work.className = "program-item__work";
@@ -209,7 +296,7 @@ function renderArchive(archiveId) {
 
   archiveProgram.replaceChildren(programTitle, programList);
 
-  // 開催回ごとの動画担当者はevent-archives-data.jsだけで管理します。
+  // 開催回ごとの動画担当者は各 archives/event-XX.js だけで管理します。
   if (videoStaffRows.length > 0) {
     const videoStaff = document.createElement("div");
     videoStaff.className = "archive-video-staff";
@@ -239,10 +326,6 @@ function renderArchive(archiveId) {
   });
 }
 
-function getArchiveEvent(eventId) {
-  return archives.find((archive) => archive.id === eventId);
-}
-
 function getEventDateValue(event) {
   if (!event?.date) return Number.NEGATIVE_INFINITY;
 
@@ -258,12 +341,29 @@ function getEventDateValue(event) {
 function getReaderArchiveItems(readerId) {
   if (!readerId) return [];
 
-  return readerArchives
-    .map((item, index) => ({
-      ...item,
-      event: getArchiveEvent(item.eventId),
-      originalIndex: index
-    }))
+  return archives
+    .flatMap((archive) => {
+      if (!Array.isArray(archive.program)) return [];
+
+      return archive.program
+        .map((programItem, index) => {
+          if (!programItem.readerArchive) return null;
+
+          return {
+            id: `${archive.id}-${programItem.id}`,
+            readerId: programItem.readerId,
+            readerName: getReaderName(programItem),
+            eventId: archive.id,
+            title: programItem.title,
+            author: programItem.author,
+            youtubeId: programItem.readerArchive.youtubeId || "",
+            thumbnail: programItem.readerArchive.thumbnail || "",
+            event: archive,
+            originalIndex: index
+          };
+        })
+        .filter(Boolean);
+    })
     .filter((item) => item.readerId === readerId)
     .sort((a, b) => {
       const dateDifference = getEventDateValue(b.event) - getEventDateValue(a.event);
