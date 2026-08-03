@@ -4,13 +4,13 @@ export const nextEvent = {
 
   scheduled: {
     year: "2026",
-    day: "07.25",
+    day: "08.29",
     weekday: "SAT",
     status: "NEXT READING",
-    title: "漂泊ノ夢　第四夜",
+    title: "漂泊ノ夢　第五夜",
     openTime: "22:20",
     startTime: "22:30",
-    performers: "白羽まちる、唯ノイフ、ʚみけɞ",
+    performers: "花咲くバッカス、唯ノ イフ、ʚみけɞ",
     participation: "「漂泊ノ海」Groupインスタンス",
     participationNote: "※事前に「漂泊ノ海」のGroupへの参加をお願いいたします。",
     note: "※進行等の都合により、時間は若干前後する可能性がございます。"
