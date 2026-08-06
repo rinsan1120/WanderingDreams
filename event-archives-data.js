@@ -15,9 +15,11 @@
 import { event01 } from "./archives/event-01.js";
 import { event02 } from "./archives/event-02.js";
 import { event03 } from "./archives/event-03.js";
+import { event04 } from "./archives/event-04.js";
 
 export const archives = [
   event01,
   event02,
-  event03
+  event03,
+  event04
 ].sort((a, b) => String(b.date ?? "").localeCompare(String(a.date ?? "")));
