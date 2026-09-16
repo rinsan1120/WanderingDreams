@@ -1,6 +1,6 @@
 // 次回開催予定は、このオブジェクトの mode と各表示内容を更新して管理します。
 export const nextEvent = {
-  mode: "scheduled",
+  mode: "preparing",
 
   scheduled: {
     year: "2026",
