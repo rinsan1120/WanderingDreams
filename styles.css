@@ -1793,3 +1793,123 @@ img {
   background: rgba(96, 165, 250, 0.35);
   color: var(--text-main);
 }
+
+/* 朗読作品一覧：既存のカード・ボタン・配色を使い、狭い画面では縦積みにします。 */
+.works-section {
+  padding-top: calc(var(--header-height) + 70px);
+}
+
+.works-section h1 {
+  margin: 0;
+  font-family: "Noto Serif JP", serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+}
+
+.works-notice,
+.works-count {
+  color: var(--text-sub);
+}
+
+.works-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr);
+  gap: 20px;
+}
+
+.works-control {
+  min-width: 0;
+}
+
+.works-control label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.works-control input,
+.works-control select {
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--panel-strong);
+  color: var(--text);
+  font: inherit;
+  color-scheme: dark;
+}
+
+.works-control input:focus-visible,
+.works-control select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.works-list {
+  display: grid;
+  gap: 16px;
+}
+
+.work-card {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 24px;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent-color);
+  border-radius: var(--radius-md);
+  background: var(--card-bg);
+  overflow-wrap: anywhere;
+}
+
+.work-card__title {
+  margin: 0;
+  font-family: "Noto Serif JP", serif;
+  font-size: 1.15rem;
+  font-weight: 500;
+}
+
+.work-card p {
+  margin: 4px 0 0;
+}
+
+.work-card__author,
+.work-card__event {
+  color: var(--text-sub);
+}
+
+@media (max-width: 900px) {
+  .work-card {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 12px 24px;
+  }
+
+  .work-card > div {
+    grid-column: 1 / -1;
+  }
+
+  .work-card > .button {
+    grid-column: 2;
+    grid-row: 2 / 4;
+  }
+}
+
+@media (max-width: 620px) {
+  .works-controls,
+  .work-card {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .work-card {
+    padding: 22px;
+    gap: 10px;
+  }
+
+  .work-card > .button {
+    grid-column: auto;
+    grid-row: auto;
+    margin-top: 8px;
+  }
+}

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="漂泊ノ夢でこれまで朗読された作品を検索できます。作品名・作者名・読み手名からお探しいただけます。">
+  <meta name="theme-color" content="#08101f">
+
+  <meta property="og:title" content="朗読作品一覧 | 漂泊ノ夢">
+  <meta property="og:description" content="漂泊ノ夢でこれまで朗読された作品を検索できます。">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/og-image.jpg">
+
+  <title>朗読作品一覧 | 漂泊ノ夢</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;600&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="works.js"></script>
+</head>
+
+<body class="works-page">
+  <a class="skip-link" href="#main-content">朗読作品一覧へ移動</a>
+  <header class="site-header" id="top">
+    <div class="header-inner">
+      <a class="site-logo" href="index.html#top" aria-label="漂泊ノ夢 トップへ">
+        <span class="site-logo__main">漂泊ノ夢</span>
+        <span class="site-logo__sub">HYŌHAKU NO YUME</span>
+      </a>
+
+      <button
+        class="menu-button"
+        id="menuButton"
+        type="button"
+        aria-expanded="false"
+        aria-controls="globalNav"
+        aria-label="メニューを開く"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="global-nav" id="globalNav" aria-label="メインメニュー">
+        <a href="index.html#about">漂泊ノ夢について</a>
+        <a href="index.html#next-event">次回開催予定</a>
+        <a href="index.html#archives">アーカイブ</a>
+        <a href="index.html#casts">読み手・スタッフ紹介</a>
+        <a href="works.html" class="is-active" aria-current="page">朗読作品</a>
+        <a href="index.html#contact">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" class="section works-section">
+    <div class="section-heading">
+      <h1>朗読作品一覧</h1>
+      <p class="section-heading__description">漂泊ノ夢でこれまで朗読された作品を検索できます。作品名・作者名・読み手名からお探しいただけます。</p>
+      <p class="works-notice">過去に朗読された作品の再朗読を制限するものではありません。</p>
+    </div>
+
+    <form class="works-controls" id="worksControls" role="search">
+      <div class="works-control works-control--search">
+        <label for="worksSearch">作品名・作者名・読み手名</label>
+        <input id="worksSearch" type="search" autocomplete="off" aria-controls="worksList">
+      </div>
+      <div class="works-control">
+        <label for="worksReader">読み手</label>
+        <select id="worksReader" aria-controls="worksList">
+          <option value="">すべての読み手</option>
+        </select>
+      </div>
+      <div class="works-control">
+        <label for="worksSort">並び順</label>
+        <select id="worksSort" aria-controls="worksList">
+          <option value="newest">新しい順</option>
+          <option value="oldest">古い順</option>
+          <option value="title">作品名順</option>
+        </select>
+      </div>
+    </form>
+
+    <p id="worksCount" class="works-count" role="status" aria-live="polite" aria-atomic="true"></p>
+    <div id="worksList" class="works-list"></div>
+    <p id="worksEmpty" hidden>該当する朗読作品は見つかりませんでした。</p>
+    <noscript>朗読作品一覧の表示にはJavaScriptを有効にしてください。</noscript>
+  </main>
+
+  <footer class="site-footer">
+    <a href="index.html#top">漂泊ノ夢</a>
+    <p>© 2026 漂泊ノ海</p>
+  </footer>
+</body>
+</html>

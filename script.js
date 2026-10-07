@@ -1,5 +1,7 @@
 import { archives } from "./event-archives-data.js";
 import { casts, staffs } from "./members-data.js";
+import { getReaderName, getReaderArchiveItems } from "./reader-archives.js";
+import { initSiteNavigation } from "./navigation.js";
 import { nextEvent } from "./next-event-data.js";
 
 const nextEventCard = document.getElementById("nextEventCard");
@@ -141,10 +143,6 @@ const readerArchiveDetail = document.getElementById("readerArchiveDetail");
 const readerArchiveSelector = document.getElementById("readerArchiveSelector");
 const readerArchiveList = document.getElementById("readerArchiveList");
 
-const menuButton = document.getElementById("menuButton");
-const globalNav = document.getElementById("globalNav");
-const siteHeader = document.querySelector(".site-header");
-
 const PARTICIPATION_RULES_URL = "content/participation-rules.html";
 
 let activeArchive = archives[0];
@@ -152,16 +150,6 @@ let participationRulesLoaded = false;
 let activeReaderArchives = [];
 let activeReaderArchive = null;
 let readerArchiveReturnFocus = null;
-
-function getCastById(readerId) {
-  return casts.find((cast) => cast.id === readerId);
-}
-
-function getReaderName(programItem) {
-  return getCastById(programItem?.readerId)?.name
-    || programItem?.readerName
-    || "読み手未設定";
-}
 
 function getYouTubeThumbnail(youtubeId, size = "maxresdefault") {
   if (!youtubeId) return "";
@@ -324,51 +312,6 @@ function renderArchive(archiveId) {
     button.classList.toggle("is-active", isActive);
     button.setAttribute("aria-pressed", String(isActive));
   });
-}
-
-function getEventDateValue(event) {
-  if (!event?.date) return Number.NEGATIVE_INFINITY;
-
-  const [year, month, day] = event.date.split(".").map(Number);
-  if (!year || !month || !day) return Number.NEGATIVE_INFINITY;
-
-  const date = new Date(year, month - 1, day);
-  const time = date.getTime();
-
-  return Number.isNaN(time) ? Number.NEGATIVE_INFINITY : time;
-}
-
-function getReaderArchiveItems(readerId) {
-  if (!readerId) return [];
-
-  return archives
-    .flatMap((archive) => {
-      if (!Array.isArray(archive.program)) return [];
-
-      return archive.program
-        .map((programItem, index) => {
-          if (!programItem.readerArchive) return null;
-
-          return {
-            id: `${archive.id}-${programItem.id}`,
-            readerId: programItem.readerId,
-            readerName: getReaderName(programItem),
-            eventId: archive.id,
-            title: programItem.title,
-            author: programItem.author,
-            youtubeId: programItem.readerArchive.youtubeId || "",
-            thumbnail: programItem.readerArchive.thumbnail || "",
-            event: archive,
-            originalIndex: index
-          };
-        })
-        .filter(Boolean);
-    })
-    .filter((item) => item.readerId === readerId)
-    .sort((a, b) => {
-      const dateDifference = getEventDateValue(b.event) - getEventDateValue(a.event);
-      return dateDifference || a.originalIndex - b.originalIndex;
-    });
 }
 
 function getReaderArchiveThumbnail(item) {
@@ -660,17 +603,18 @@ function renderSelectedReaderArchive(readerArchiveId) {
   renderReaderArchiveSelector();
 }
 
-function openReaderArchiveModal(readerId, trigger) {
+function openReaderArchiveModal(readerId, trigger, readerArchiveId) {
   const cast = casts.find((item) => item.id === readerId);
   const archivesForReader = getReaderArchiveItems(readerId);
-  if (!readerArchiveModal || !cast || archivesForReader.length === 0) return;
+  if (!readerArchiveModal || archivesForReader.length === 0) return;
 
   readerArchiveReturnFocus = trigger;
   activeReaderArchives = archivesForReader;
-  activeReaderArchive = archivesForReader[0];
+  activeReaderArchive = archivesForReader.find((item) => item.id === readerArchiveId)
+    || archivesForReader[0];
 
   if (readerArchiveModalTitle) {
-    readerArchiveModalTitle.textContent = cast.name;
+    readerArchiveModalTitle.textContent = cast?.name || activeReaderArchive.readerName;
   }
 
   renderReaderArchivePlayer(activeReaderArchive);
@@ -819,25 +763,7 @@ if (openRulesButton && closeRulesButton && rulesModal && rulesModalContent) {
   });
 }
 
-menuButton.addEventListener("click", () => {
-  const isOpen = menuButton.getAttribute("aria-expanded") === "true";
-  menuButton.setAttribute("aria-expanded", String(!isOpen));
-  menuButton.setAttribute("aria-label", isOpen ? "メニューを開く" : "メニューを閉じる");
-  globalNav.classList.toggle("is-open", !isOpen);
-  document.body.classList.toggle("menu-open", !isOpen);
-});
-
-globalNav.addEventListener("click", (event) => {
-  if (!event.target.matches("a")) return;
-  menuButton.setAttribute("aria-expanded", "false");
-  menuButton.setAttribute("aria-label", "メニューを開く");
-  globalNav.classList.remove("is-open");
-  document.body.classList.remove("menu-open");
-});
-
-window.addEventListener("scroll", () => {
-  siteHeader.classList.toggle("is-scrolled", window.scrollY > 30);
-});
+initSiteNavigation();
 
 const revealObserver = new IntersectionObserver(
   (entries) => {
@@ -855,7 +781,8 @@ document.querySelectorAll(".reveal").forEach((element) => {
   revealObserver.observe(element);
 });
 
-const navLinks = [...document.querySelectorAll(".global-nav a")];
+// 別ページへのリンクをセクション監視のCSSセレクターに渡さないようにします。
+const navLinks = [...document.querySelectorAll('.global-nav a[href^="#"]')];
 const sections = navLinks
   .map((link) => document.querySelector(link.getAttribute("href")))
   .filter(Boolean);
@@ -887,3 +814,29 @@ renderArchiveControls();
 renderArchive(archives[0].id);
 renderCasts();
 renderStaffs();
+
+// 一覧からの一時的な遷移指定。読み手と作品の組み合わせを検証してから開きます。
+const archiveNavigationUrl = new URL(window.location.href);
+const requestedReader = archiveNavigationUrl.searchParams.get("reader");
+const requestedArchive = archiveNavigationUrl.searchParams.get("archive");
+if (requestedReader && requestedArchive) {
+  const requestedItem = getReaderArchiveItems(requestedReader)
+    .find((item) => item.id === requestedArchive);
+  if (requestedItem) {
+    const trigger = [...castGrid.querySelectorAll(".cast-card__archive-trigger")]
+      .find((button) => button.dataset.readerId === requestedReader);
+    openReaderArchiveModal(requestedReader, trigger || document.querySelector('.global-nav a[href="works.html"]'), requestedArchive);
+    // #castsへの初期アンカー移動後にも、フォーカスを開いたモーダル内に保ちます。
+    requestAnimationFrame(() => {
+      if (readerArchiveModal.open && !readerArchiveModal.contains(document.activeElement)) {
+        closeReaderArchiveButton?.focus();
+      }
+    });
+  }
+}
+// 開き直した際に自動表示を繰り返さないよう、使用済み指定だけ取り除きます。
+if (archiveNavigationUrl.searchParams.has("reader") || archiveNavigationUrl.searchParams.has("archive")) {
+  archiveNavigationUrl.searchParams.delete("reader");
+  archiveNavigationUrl.searchParams.delete("archive");
+  history.replaceState(history.state, "", archiveNavigationUrl);
+}
