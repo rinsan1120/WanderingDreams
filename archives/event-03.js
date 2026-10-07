@@ -17,6 +17,8 @@
 //
 // program:
 // - その開催回で朗読された演目一覧です。
+// - titleKana は五十音順に使用する必須の読み仮名です。ひらがなで手入力してください。
+// - 作品名の読みをそのまま記載し、装飾の括弧・記号や不要な空白は含めません。
 // - 演目ごとの id は同じ開催回内で重複しないようにしてください。
 // - readerId は members-data.js の casts に登録されている id と一致させてください。
 // - ゲストなど members-data.js にいない読み手だけ、例外として readerName を追加できます。
@@ -37,6 +39,7 @@ export const event03 = {
       id: "machiru-little-prince-2",
       readerId: "machiru",
       title: "星の王子さま（後編）",
+      titleKana: "ほしのおうじさまこうへん",
       author: "サン=テグジュペリ",
       readerArchive: {
         youtubeId: "SdStX04sdF8"
@@ -46,6 +49,7 @@ export const event03 = {
       id: "mike-orihime-and-hikoboshi",
       readerId: "mike",
       title: "織姫と彦星",
+      titleKana: "おりひめとひこぼし",
       author: "ʚみけɞ",
       readerArchive: {
         youtubeId: "WN6bVJGSPXY"
@@ -55,6 +59,7 @@ export const event03 = {
       id: "bakkasu-kashiwa-dream",
       readerId: "bakkasu",
       title: "年とったカシワの木のさいごの夢",
+      titleKana: "としとったかしわのきのさいごのゆめ",
       author: "アンデルセン",
       readerArchive: {
         youtubeId: "z1sadDOXiW4"

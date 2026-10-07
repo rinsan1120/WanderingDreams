@@ -39,6 +39,7 @@ export function getReaderArchiveItems(readerId) {
             readerName: getReaderName(programItem),
             eventId: archive.id,
             title: programItem.title,
+            titleKana: programItem.titleKana || "",
             author: programItem.author,
             youtubeId: programItem.readerArchive.youtubeId || "",
             thumbnail: programItem.readerArchive.thumbnail || "",

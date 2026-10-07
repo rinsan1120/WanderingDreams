@@ -203,6 +203,10 @@ function validateArchiveData() {
         console.warn(`演目の必須項目が不足しています: ${programLabel}`, programItem);
       }
 
+      if (typeof programItem?.titleKana !== "string" || !programItem.titleKana.trim()) {
+        console.warn(`演目のtitleKanaが未設定です: ${programLabel}`);
+      }
+
       if (programItem?.id) {
         if (programIds.has(programItem.id)) {
           console.warn(`同じ開催回内で演目IDが重複しています: ${programLabel}`);

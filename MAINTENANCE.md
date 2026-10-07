@@ -101,7 +101,7 @@ event-archives-data.js
 7. `title` を開催回名へ変更する  
    例：`title: "第四夜"`
 8. 開催回全体のYouTube動画IDを `youtubeId` に入力する
-9. `program` に演目を登録する
+9. `program` に演目を登録する（`title`、`titleKana`、`author`、`readerId`、`readerArchive.youtubeId` を入力する）
 10. `videoStaff` に動画撮影・動画編集担当者を入力する
 11. `event-archives-data.js` を開く
 12. 新しい開催回ファイルの `import` を追加する
@@ -146,6 +146,7 @@ program: [
     id: "machiru-little-prince-3",
     readerId: "machiru",
     title: "作品名",
+    titleKana: "さくひんめい",
     author: "著者名",
     readerArchive: {
       youtubeId: "個別朗読動画のYouTube ID"
@@ -162,6 +163,7 @@ program: [
 - YouTubeはURL全体ではなく、動画IDだけを入力してください。
 - 演目の `{}`、`[]`、`,` を消さないようにしてください。
 - 既存開催回ファイルを上書きしないでください。
+- `titleKana` は必須です。作品名の読みをひらがなで手入力し、装飾の括弧・記号や不要な空白は含めないでください。漢字の読みは自動推定しません。
 - `program` 内の演目IDは、同じ開催回内で重複させないでください。
 - `readerId` は `members-data.js` の読み手IDと一致させてください。
 
@@ -348,6 +350,8 @@ readerArchive: {
 - 開催回全体の動画を再生できるか確認する
 - 読み手別動画を追加した場合は、読み手カードから動画を確認する
 - 作品名、著者名、読み手名に誤字がないか確認する
+- 全演目に `titleKana` が入力され、五十音順が意図した順か確認する
+- トップページのコンソールに `titleKana` 未設定の警告がないか確認する
 - YouTube動画IDへURL全体を入力していないか確認する
 
 ## YouTube動画IDについて
@@ -392,6 +396,11 @@ XWj7ig7OJ9U
 
 `works.html` の朗読作品一覧は、`event-archives-data.js` が読み込む各 `archives/event-XX.js` の `program` から自動生成します。作品専用DBファイルを更新する必要はありません。
 
-従来どおり開催回を登録し、演目に `readerId`、作品名、著者名、`readerArchive.youtubeId` を入力すると、開催回別・読み手別アーカイブと作品一覧に反映されます。個別動画が未登録の演目は作品一覧には掲載しません。読み手フィルタの候補は `members-data.js` の `casts` から生成します。
+従来どおり開催回を登録し、演目に `readerId`、作品名、作品名の読み仮名 `titleKana`、著者名、`readerArchive.youtubeId` を入力すると、開催回別・読み手別アーカイブと作品一覧に反映されます。個別動画が未登録の演目は作品一覧には掲載しません。読み手フィルタの候補は `members-data.js` の `casts` から生成します。
 
 更新後は `works.html` で作品の表示・検索を確認し、「朗読を見る」から該当作品が選択された読み手別モーダルへ移動できることを確認してください。再朗読した作品も演目ごとに別々に表示されます。
+
+
+五十音順には `program[].titleKana` を使用します。同じ読み仮名の場合は作品名、朗読日の新しい順で並びます。新しい作品追加時には必ず入力してください。
+
+著者フィルタの候補は掲載対象の演目の `author` から自動生成・重複除外するため、著者一覧の別途更新は不要です。作品カードの作者名を押すと著者で絞り込み、検索文字列・読み手は維持されます。更新後は検索・著者・読み手の併用と、戻る操作で著者を含む状態が復元されることも確認してください。

@@ -17,6 +17,8 @@
 //
 // program:
 // - その開催回で朗読された演目一覧です。
+// - titleKana は五十音順に使用する必須の読み仮名です。ひらがなで手入力してください。
+// - 作品名の読みをそのまま記載し、装飾の括弧・記号や不要な空白は含めません。
 // - 演目ごとの id は同じ開催回内で重複しないようにしてください。
 // - readerId は members-data.js の casts に登録されている id と一致させてください。
 // - ゲストなど members-data.js にいない読み手だけ、例外として readerName を追加できます。
@@ -37,6 +39,7 @@ export const event01 = {
       id: "bakkasu-bad-king",
       readerId: "bakkasu",
       title: "わるい王様（伝説）",
+      titleKana: "わるいおうさまでんせつ",
       author: "アンデルセン",
       readerArchive: {
         youtubeId: "MTdiwIZ5VdI"
@@ -46,6 +49,7 @@ export const event01 = {
       id: "if-twin-stars",
       readerId: "if",
       title: "双子の星",
+      titleKana: "ふたごのほし",
       author: "宮沢賢治",
       readerArchive: {
         youtubeId: "6wfjCH8EqSg"
@@ -55,6 +59,7 @@ export const event01 = {
       id: "mike-flowers-and-humans",
       readerId: "mike",
       title: "花と人間の話",
+      titleKana: "はなとにんげんのはなし",
       author: "小川未明",
       readerArchive: {
         youtubeId: "uReP7kulmpw"

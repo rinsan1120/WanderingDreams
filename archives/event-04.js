@@ -17,6 +17,8 @@
 //
 // program:
 // - その開催回で朗読された演目一覧です。
+// - titleKana は五十音順に使用する必須の読み仮名です。ひらがなで手入力してください。
+// - 作品名の読みをそのまま記載し、装飾の括弧・記号や不要な空白は含めません。
 // - 演目ごとの id は同じ開催回内で重複しないようにしてください。
 // - readerId は members-data.js の casts に登録されている id と一致させてください。
 // - ゲストなど members-data.js にいない読み手だけ、例外として readerName を追加できます。
@@ -37,6 +39,7 @@ export const event04 = {
       id: "machiru-anatanokoega-saigonookurimono",
       readerId: "machiru",
       title: "あなたの声が、最後の贈りもの",
+      titleKana: "あなたのこえがさいごのおくりもの",
       author: "声の書庫",
       readerArchive: {
         youtubeId: "qEuQ656GQuM"
@@ -46,6 +49,7 @@ export const event04 = {
       id: "if-hoshinoginka",
       readerId: "if",
       title: "星の銀貨",
+      titleKana: "ほしのぎんか",
       author: "グリム兄弟",
       readerArchive: {
         youtubeId: "2o3t0f5SYtY"
@@ -55,6 +59,7 @@ export const event04 = {
       id: "if-rapunzel",
       readerId: "if",
       title: "ラプンツェル",
+      titleKana: "らぷんつぇる",
       author: "グリム兄弟",
       readerArchive: {
         youtubeId: "kS2VnOMnUfc"
@@ -64,6 +69,7 @@ export const event04 = {
       id: "mike-hoshinoajisai",
       readerId: "mike",
       title: "星の紫陽花",
+      titleKana: "ほしのあじさい",
       author: "浅井",
       readerArchive: {
         youtubeId: "08U8Y1eMrxc"

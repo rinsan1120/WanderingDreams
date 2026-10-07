@@ -1814,7 +1814,7 @@ img {
 
 .works-controls {
   display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 2fr) repeat(3, minmax(0, 1fr));
   gap: 20px;
 }
 
@@ -1880,7 +1880,37 @@ img {
   color: var(--text-sub);
 }
 
+/* 作者名は外部リンクではなく、このページの著者フィルタを操作するボタンです。 */
+.work-card__author {
+  display: inline-block;
+  max-width: 100%;
+  min-height: 44px;
+  padding: 4px 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  text-align: left;
+  overflow-wrap: anywhere;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  cursor: pointer;
+}
+
+.work-card__author:hover {
+  color: var(--accent);
+}
+
+.work-card__author:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
 @media (max-width: 900px) {
+  .works-controls {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .work-card {
     grid-template-columns: minmax(0, 1fr) auto;
     gap: 12px 24px;

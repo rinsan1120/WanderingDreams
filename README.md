@@ -64,6 +64,7 @@ HTML / CSS / JavaScriptのみで構成された、GitHub Pages向けの静的な
 - `program[].readerId`：読み手ID
 - `program[].readerName`：ゲストなど例外時の読み手表示名
 - `program[].title`：作品名
+- `program[].titleKana`：五十音順に使用する作品名の読み仮名（必須）
 - `program[].author`：著者名
 - `program[].readerArchive.youtubeId`：個別朗読動画のYouTube動画ID
 - `program[].readerArchive.thumbnail`：個別サムネイルURL（通常は省略可能）
@@ -148,8 +149,13 @@ https://www.youtube.com/watch?v=abcdefghijk
 
 ## 朗読作品一覧
 
-`works.html` は過去の朗読作品を作品名・作者名・読み手名で検索するページです。読み手フィルタと並び替えにも対応しています。
+`works.html` は過去の朗読作品を作品名・作者名・読み手名で検索するページです。著者・読み手フィルタと、新しい順・古い順・五十音順の並び替えにも対応しています。
 
 `works.js` は既存の `archives` データから個別動画のある演目を自動表示します。作品専用DBファイルはありません。従来どおり `archives/event-XX.js` と `event-archives-data.js` を更新するだけで反映されます。
 
-`reader-archives.js` は両ページ共通の個別アーカイブ生成処理、`navigation.js` は共通ヘッダーの操作を管理します。「朗読を見る」は `index.html` の読み手別モーダルを指定作品から開きます。検索状態はブラウザの戻る操作時だけ復元し、新規アクセス・再読み込みでは初期化します。
+`reader-archives.js` は両ページ共通の個別アーカイブ生成処理、`navigation.js` は共通ヘッダーの操作を管理します。「朗読を見る」は `index.html` の読み手別モーダルを指定作品から開きます。検索文字列・著者・読み手・並び順・スクロール位置はブラウザの戻る操作時だけ復元し、新規アクセス・再読み込みでは初期化します。
+
+
+新しい演目には `titleKana` も必須です。作品名の読みをひらがなで手入力し、装飾の括弧・記号や不要な空白は含めません。漢字の読みは自動推定しません。五十音順では `titleKana`、同じ読みなら作品名、朗読日の新しい順で並べます。未入力はトップページのデータ検証で警告されます。
+
+著者フィルタの候補は掲載対象の演目の `author` から重複を除いて自動生成するため、別途更新不要です。作品カードの作者名ボタンでも同じフィルタを設定できます。検索文字列・著者・読み手はAND条件で併用します。

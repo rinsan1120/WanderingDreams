@@ -17,6 +17,8 @@
 //
 // program:
 // - その開催回で朗読された演目一覧です。
+// - titleKana は五十音順に使用する必須の読み仮名です。ひらがなで手入力してください。
+// - 作品名の読みをそのまま記載し、装飾の括弧・記号や不要な空白は含めません。
 // - 演目ごとの id は同じ開催回内で重複しないようにしてください。
 // - readerId は members-data.js の casts に登録されている id と一致させてください。
 // - ゲストなど members-data.js にいない読み手だけ、例外として readerName を追加できます。
@@ -37,6 +39,7 @@ export const event02 = {
       id: "if-twin-stars-2",
       readerId: "if",
       title: "双子の星（二）",
+      titleKana: "ふたごのほしに",
       author: "宮沢賢治",
       readerArchive: {
         youtubeId: "Hb7I77c-AHw"
@@ -46,6 +49,7 @@ export const event02 = {
       id: "machiru-little-prince-1",
       readerId: "machiru",
       title: "星の王子様（前編）",
+      titleKana: "ほしのおうじさまぜんぺん",
       author: "サン=テグジュペリ",
       readerArchive: {
         youtubeId: "WetvjBmFZu4"
@@ -55,6 +59,7 @@ export const event02 = {
       id: "isaku-starry-night",
       readerId: "isaku",
       title: "星の音がきこえる夜に",
+      titleKana: "ほしのおとがきこえるよるに",
       author: "あねり",
       readerArchive: {
         youtubeId: "8S3wFl6DKg4"
@@ -64,6 +69,7 @@ export const event02 = {
       id: "isaku-flower-fairy",
       readerId: "isaku",
       title: "花をつくる妖精のおはなし",
+      titleKana: "はなをつくるようせいのおはなし",
       author: "むち",
       readerArchive: {
         youtubeId: "YCv2B3hC-kA"
