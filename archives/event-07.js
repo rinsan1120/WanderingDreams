@@ -33,7 +33,7 @@ export const event07 = {
   id: "event-07",
   date: "2026.10.25",
   title: "第七夜",
-  youtubeId: "",
+  youtubeId: "Nh9Zs2MGies",
   program: [
     {
       id: "mike-kogitsuneza",
@@ -42,7 +42,7 @@ export const event07 = {
       titleKana: "こぎつねざ",
       author: "矢守野良吉",
       readerArchive: {
-        youtubeId: ""
+        youtubeId: "ZNjOf7T08Yo"
       }
     },
     {
@@ -52,7 +52,7 @@ export const event07 = {
       titleKana: "よだかのほし",
       author: "宮沢賢治",
       readerArchive: {
-        youtubeId: ""
+        youtubeId: "883TSjZi_b0"
       }
     },
         {
@@ -62,7 +62,7 @@ export const event07 = {
       titleKana: "えのないえほん0",
       author: "アンデルセン",
       readerArchive: {
-        youtubeId: ""
+        youtubeId: "48fsOLxkW54"
       }
     }
   ],
