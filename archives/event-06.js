@@ -84,7 +84,7 @@ export const event06 = {
       readerArchive: {
         youtubeId: "LuEaS2x70So"
       }
-
+    }
   ],
   videoStaff: {
     camera: "龍飛",
