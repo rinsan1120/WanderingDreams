@@ -83,7 +83,7 @@ export const casts = [
     id: "cross",
     name: "星河原クロス",
     comment: "作成中",
-    image: "assets/members/cross.png",
+    image: "assets/members/cross.webp",
     links: [
       {
         label: "YouTube",
