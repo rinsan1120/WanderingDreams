@@ -121,6 +121,7 @@ const archiveList = document.getElementById("archiveList");
 const archiveDate = document.getElementById("archiveDate");
 const archiveTitle = document.getElementById("archiveTitle");
 const archiveThumbnail = document.getElementById("archiveThumbnail");
+const archiveVideoPlaceholder = document.getElementById("archiveVideoPlaceholder");
 const archiveProgram = document.getElementById("archiveProgram");
 const castGrid = document.getElementById("castGrid");
 const staffGrid = document.getElementById("staffGrid");
@@ -252,14 +253,24 @@ function renderArchive(archiveId) {
   activeArchive = archive;
   archiveDate.textContent = archive.date;
   archiveTitle.textContent = archive.title;
-  archiveThumbnail.onerror = () => {
-    const fallbackThumbnail = getYouTubeThumbnail(archive.youtubeId, "hqdefault");
-    if (fallbackThumbnail && archiveThumbnail.src !== fallbackThumbnail) {
-      archiveThumbnail.src = fallbackThumbnail;
-    }
-  };
-  archiveThumbnail.src = archive.thumbnail || getYouTubeThumbnail(archive.youtubeId);
-  archiveThumbnail.alt = `${archive.title}の動画サムネイル`;
+  // 動画未設定の開催回も、開催記録はそのまま表示します。
+  const hasVideo = Boolean(archive.youtubeId);
+  openVideoButton.hidden = !hasVideo;
+  archiveVideoPlaceholder.hidden = hasVideo;
+  archiveThumbnail.onerror = null;
+  if (hasVideo) {
+    archiveThumbnail.onerror = () => {
+      const fallbackThumbnail = getYouTubeThumbnail(archive.youtubeId, "hqdefault");
+      if (fallbackThumbnail && archiveThumbnail.src !== fallbackThumbnail) {
+        archiveThumbnail.src = fallbackThumbnail;
+      }
+    };
+    archiveThumbnail.src = archive.thumbnail || getYouTubeThumbnail(archive.youtubeId);
+    archiveThumbnail.alt = `${archive.title}の動画サムネイル`;
+  } else {
+    archiveThumbnail.removeAttribute("src");
+    archiveThumbnail.alt = "";
+  }
 
   const programTitle = document.createElement("h4");
   programTitle.textContent = "PROGRAM";
@@ -637,6 +648,7 @@ function closeReaderArchiveModal() {
 }
 
 function openVideo() {
+  if (!activeArchive?.youtubeId) return;
   videoFrame.src = `https://www.youtube-nocookie.com/embed/${activeArchive.youtubeId}?autoplay=1`;
   videoModal.showModal();
 }

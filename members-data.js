@@ -78,6 +78,18 @@ export const casts = [
         url: "https://www.kobayashi-isaku.com/"
       }
     ]
+  },
+    {
+    id: "cross",
+    name: "星河原クロス",
+    comment: "作成中",
+    image: "",
+    links: [
+      {
+        label: "YouTube",
+        url: "https://www.youtube.com/@hoshigawara_"
+      }
+    ]
   }
 ];
 
