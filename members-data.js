@@ -82,7 +82,7 @@ export const casts = [
     {
     id: "cross",
     name: "星河原クロス",
-    comment: "作成中",
+    comment: "普段はVTuberとして、YouTubeで雑談配信を中心にゲームをしたり変わったものを食べたりしながらのんびり活動しているVRChat初心者です。皆さんに穏やかなやさしい気持ちになってもらえるように、心を込めて読ませていただきます。",
     image: "assets/members/cross.webp",
     links: [
       {
