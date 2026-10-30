@@ -88,6 +88,10 @@ export const casts = [
       {
         label: "YouTube",
         url: "https://www.youtube.com/@hoshigawara_"
+      },
+      {
+        label: " X ",
+        url: "https://x.com/hoshigawara_"
       }
     ]
   }
