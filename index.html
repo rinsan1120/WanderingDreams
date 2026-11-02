@@ -67,27 +67,12 @@
         </p>
 
         <div class="hero__actions">
-        <a class="button button--ghost" href="#about">
-            漂泊ノ夢について
-        </a>          
         <a class="button button--ghost" href="#next-event">
-            次回開催予定
+            朗読会に参加する
         </a>
 
         <a class="button button--ghost" href="#archives">
-            アーカイブ
-        </a>
-
-        <a class="button button--ghost" href="works.html">
-            朗読作品
-        </a>
-
-        <a class="button button--ghost" href="#casts">
-            読み手・スタッフ紹介
-        </a>
-
-        <a class="button button--ghost" href="#contact">
-            お問い合わせ
+            過去の朗読を聴く
         </a>
         </div>
     </div>
@@ -138,6 +123,28 @@
 
       <!-- next-event-data.js の設定に応じて次回開催予定を描画します。 -->
       <article class="event-card" id="nextEventCard"></article>
+
+      <!-- 開催日の表示モードに関係なく、参加手順を確認できます。 -->
+      <section class="participation-guide" aria-labelledby="participationTitle">
+        <h3 id="participationTitle">初めての方へ・参加の流れ</h3>
+        <ol class="participation-steps">
+          <li>
+            <h4>グループに参加する</h4>
+            <p>事前にVRChatの「漂泊ノ海」グループへ参加してください。</p>
+            <a class="guide-link" href="https://vrc.group/HYOHAK.5005" target="_blank" rel="noopener noreferrer">「漂泊ノ海」グループへ</a>
+          </li>
+          <li>
+            <h4>開催日時を確認する</h4>
+            <p>次回開催予定で、開催日と開場・開演時刻を確認してください。</p>
+            <a class="guide-link" href="#next-event">次回開催予定を確認する</a>
+          </li>
+          <li>
+            <h4>会場で朗読を楽しむ</h4>
+            <p>開催時は「漂泊ノ海」のGroupインスタンスへ参加し、会場で朗読をお楽しみください。</p>
+            <button class="guide-link" id="guideRulesButton" type="button" aria-haspopup="dialog" aria-controls="rulesModal">参加ルールを確認する</button>
+          </li>
+        </ol>
+      </section>
     </section>
 
     <section class="section section--archives reveal" id="archives" aria-labelledby="archivesTitle">
@@ -148,6 +155,13 @@
           開催日を選ぶと、漂泊ノ夢のアーカイブをご覧いただけます。
         </p>
       </div>
+
+      <!-- 既存の開催回・作品一覧・読み手別アーカイブへ案内します。 -->
+      <nav class="archive-paths" aria-label="朗読アーカイブの探し方">
+        <a href="#archiveList"><strong>開催回から探す</strong><span>開催日を選んで、その回の動画とプログラムを見る</span></a>
+        <a href="works.html"><strong>作品から探す</strong><span>作品名・作者名・読み手名で朗読作品を探す</span></a>
+        <a href="#casts"><strong>読み手から探す</strong><span>読み手紹介から、個別の朗読アーカイブを開く</span></a>
+      </nav>
 
       <div class="archive-layout">
         <div class="archive-picker">

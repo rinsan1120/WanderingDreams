@@ -383,6 +383,8 @@ function renderCasts() {
       imageWrapper.type = "button";
       imageWrapper.dataset.readerId = cast.id;
       imageWrapper.setAttribute("aria-label", `${cast.name}の朗読アーカイブを見る`);
+      // 同じモーダルを開くキーボード操作は、下の明示ボタンにまとめます。
+      imageWrapper.tabIndex = -1;
     }
 
     const image = document.createElement("img");
@@ -428,6 +430,17 @@ function renderCasts() {
     });
 
     body.append(name, comment, links);
+    if (hasReaderArchives) {
+      const archiveButton = document.createElement("button");
+      archiveButton.className = "cast-card__archive-link guide-link";
+      archiveButton.type = "button";
+      archiveButton.dataset.readerId = cast.id;
+      archiveButton.textContent = "この読み手の朗読を聴く";
+      archiveButton.setAttribute("aria-label", `${cast.name}：この読み手の朗読を聴く`);
+      archiveButton.setAttribute("aria-haspopup", "dialog");
+      archiveButton.setAttribute("aria-controls", "readerArchiveModal");
+      body.append(archiveButton);
+    }
     castCard.append(imageWrapper, body);
 
     return castCard;
@@ -709,7 +722,7 @@ archiveList.addEventListener("click", (event) => {
 });
 
 castGrid.addEventListener("click", (event) => {
-  const button = event.target.closest(".cast-card__archive-trigger");
+  const button = event.target.closest(".cast-card__archive-trigger, .cast-card__archive-link");
   if (!button) return;
 
   openReaderArchiveModal(button.dataset.readerId, button);
@@ -766,6 +779,7 @@ videoModal.addEventListener("cancel", () => {
 
 if (openRulesButton && closeRulesButton && rulesModal && rulesModalContent) {
   openRulesButton.addEventListener("click", openRulesModal);
+  document.getElementById("guideRulesButton")?.addEventListener("click", openRulesModal);
   closeRulesButton.addEventListener("click", closeRulesModal);
 
   rulesModal.addEventListener("click", (event) => {

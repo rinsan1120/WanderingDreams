@@ -297,6 +297,124 @@ img {
   gap: 14px;
 }
 
+.hero__actions .button {
+  min-width: 220px;
+}
+
+/* 参加案内と探し方は、既存カードの表示を変えずに補助導線として配置します。 */
+.participation-guide {
+  margin-top: 40px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+}
+
+.participation-guide h3 {
+  margin: 0 0 20px;
+  font-family: "Noto Serif JP", serif;
+  font-weight: 500;
+}
+
+.participation-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+  margin: 0;
+  padding-left: 1.5em;
+}
+
+.participation-steps li::marker {
+  color: var(--accent-strong);
+}
+
+.participation-steps h4 {
+  margin: 0;
+  font-weight: 500;
+}
+
+.participation-steps p {
+  margin: 10px 0;
+  color: var(--text-sub);
+  font-size: 0.9rem;
+}
+
+.guide-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 4px 0;
+  border: 0;
+  background: transparent;
+  color: var(--accent-strong);
+  font: inherit;
+  font-size: 0.9rem;
+  text-align: left;
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+  cursor: pointer;
+}
+
+.guide-link:hover {
+  color: var(--text-main);
+}
+
+.guide-link:focus-visible,
+.archive-paths a:focus-visible,
+.hero__actions a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.cast-card__archive-link {
+  margin-top: 12px;
+  align-self: flex-start;
+}
+
+.archive-paths {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.archive-paths a {
+  padding: 14px 18px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--card-bg);
+  text-decoration: none;
+}
+
+.archive-paths a:hover {
+  border-color: var(--accent);
+}
+
+.archive-paths strong {
+  display: block;
+  color: var(--accent-strong);
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
+.archive-paths span {
+  display: block;
+  margin-top: 6px;
+  color: var(--text-sub);
+  font-size: 0.85rem;
+}
+
+@media (max-width: 760px) {
+  .participation-steps,
+  .archive-paths {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .hero__actions .button {
+    min-width: 0;
+  }
+}
+
 .button {
   display: inline-flex;
   min-height: 50px;
