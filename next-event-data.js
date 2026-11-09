@@ -1,16 +1,16 @@
 // 次回開催予定は、このオブジェクトの mode と各表示内容を更新して管理します。
 export const nextEvent = {
-  mode: "preparing",
+  mode: "scheduled",
 
   scheduled: {
     year: "2026",
-    day: "10.25",
-    weekday: "SUN",
+    day: "11.28",
+    weekday: "SAT",
     status: "NEXT READING",
-    title: "漂泊ノ夢　第七夜",
+    title: "漂泊ノ夢　第八夜",
     openTime: "22:20",
     startTime: "22:30",
-    performers: "花咲くバッカス、ʚみけɞ、星河原クロス",
+    performers: "唯ノ イフ、白羽まちる、ʚみけɞ ",
     participation: "「漂泊ノ海」Groupインスタンス",
     participationNote: "※事前に「漂泊ノ海」のGroupへの参加をお願いいたします。",
     note: "※進行等の都合により、時間は若干前後する可能性がございます。"
