@@ -105,7 +105,7 @@ function renderNextEventActions(groupButtonLabel) {
       </button>
       <a
         class="button button--ghost"
-        href="https://x.com/rinsan11201"
+        href="https://x.com/hyohakunoyume"
         target="_blank"
         rel="noopener noreferrer"
       >
